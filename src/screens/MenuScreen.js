@@ -13,8 +13,8 @@ export default function MenuScreen({navigation}) {
   };
 
   const pick = (evt) => {
-    console.log("from All.js to MenuScreen: "+ JSON.stringify(evt));
-  }
+    console.log('from All.js to MenuScreen: ' + JSON.stringify(evt));
+  };
   return (
     <MenuContext.Provider value={{quizData, pick}}>
       <View style={styles.container}>
