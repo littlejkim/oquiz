@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "299355764684",
+    "firebase_url": "https://oquiz-8f2d2.firebaseio.com",
+    "project_id": "oquiz-8f2d2",
+    "storage_bucket": "oquiz-8f2d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299355764684:android:c5d87a34eb0b4814700f69",
+        "android_client_info": {
+          "package_name": "com.oquiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "299355764684-tfnliscc6gi7rcfup7eu37frv02hiv4g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.oquiz",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "299355764684-isbsm7lhdpjqc9ogifunfc8rba2s05d2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXtk18y81ij5sc3wWR8eOa-XttmLtsyvs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "299355764684-isbsm7lhdpjqc9ogifunfc8rba2s05d2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -12,8 +12,11 @@ export default function MenuScreen({navigation}) {
     console.log('selected');
   };
 
+  const pick = (evt) => {
+    console.log("from All.js to MenuScreen: "+ JSON.stringify(evt));
+  }
   return (
-    <MenuContext.Provider value={{quizData}}>
+    <MenuContext.Provider value={{quizData, pick}}>
       <View style={styles.container}>
         <MenuNavigation />
       </View>

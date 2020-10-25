@@ -4,7 +4,7 @@ import styles from '../../constants/menuStyles';
 import {MenuContext} from '../../screens/MenuScreen';
 
 export default function All() {
-  const {quizData} = React.useContext(MenuContext);
+  const {quizData,pick} = React.useContext(MenuContext);
   return (
     <FlatList
       extraData={quizData.all}
@@ -19,7 +19,14 @@ export default function All() {
                 ? styles.itemSelected
                 : styles.itemNotSelected
             }
-            onPress={() => console.log(item + index + 'selected')}>
+            onPress={() => {
+              console.log(item + index + 'selected')
+              pick({
+                "item": item,
+                "index": index
+              })
+              
+            }}>
             <Text style={styles.itemText}>
               {item.id}_{item.menu}
             </Text>
