@@ -15,7 +15,10 @@ export default function HomeScreen({navigation}) {
           onPress={() => navigation.navigate('Menu')}>
           <Text style={styles.footerMainText}>퀴즈 구경하기</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerSubButton} activeOpacity={0.7}>
+        <TouchableOpacity
+          style={styles.footerSubButton}
+          activeOpacity={0.7}
+          onPress={() => navigation.navigate('Create')}>
           <Text style={styles.footerSubtext}>퀴즈 만들기</Text>
         </TouchableOpacity>
       </View>

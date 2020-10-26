@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {TouchableOpacity, Text, View, FlatList} from 'react-native';
+import React from 'react';
+import {TouchableOpacity, Text, FlatList} from 'react-native';
 import styles from '../../constants/menuStyles';
 import {MenuContext} from '../../screens/MenuScreen';
 
-export default function New() {
-  const {quizData} = React.useContext(MenuContext);
+export default function All() {
+  const {quizData, pick} = React.useContext(MenuContext);
   return (
     <FlatList
       extraData={quizData.new}
@@ -14,19 +14,21 @@ export default function New() {
       renderItem={({item, index}) => {
         return (
           <TouchableOpacity
-            style={
-              item.selected === true
-                ? styles.itemSelected
-                : styles.itemNotSelected
-            }
-            onPress={() => console.log(item + index + 'selected')}>
+            style={styles.item}
+            activeOpacity={0.7}
+            onPress={() => {
+              pick({
+                item: item,
+                index: index,
+              });
+            }}>
             <Text style={styles.itemText}>
               {item.id}_{item.menu}
             </Text>
           </TouchableOpacity>
         );
       }}
-      numColumns={2}
+      numColumns={1}
     />
   );
 }

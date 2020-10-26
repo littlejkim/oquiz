@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {TouchableOpacity, Text, View, FlatList} from 'react-native';
+import React from 'react';
+import {TouchableOpacity, Text, FlatList} from 'react-native';
 import styles from '../../constants/menuStyles';
 import {MenuContext} from '../../screens/MenuScreen';
 
@@ -7,18 +7,14 @@ export default function All() {
   const {quizData, pick} = React.useContext(MenuContext);
   return (
     <FlatList
-      extraData={quizData.all}
       keyExtractor={(item) => item.id.toString()}
-      data={formatData(quizData.all)}
+      data={quizData.all}
       style={styles.container}
       renderItem={({item, index}) => {
         return (
           <TouchableOpacity
-            style={
-              item.selected === true
-                ? styles.itemSelected
-                : styles.itemNotSelected
-            }
+            style={styles.item}
+            activeOpacity={0.7}
             onPress={() => {
               pick({
                 item: item,
@@ -35,17 +31,3 @@ export default function All() {
     />
   );
 }
-
-const formatData = (data) => {
-  const numColumns = 2;
-  const numberOfFullRows = Math.floor(data.length / numColumns);
-  let numberOfElementsLastRow = data.length - numberOfFullRows * numColumns;
-  while (
-    numberOfElementsLastRow !== numColumns &&
-    numberOfElementsLastRow !== 0
-  ) {
-    data.push({key: `blank-${numberOfElementsLastRow}`, empty: true});
-    numberOfElementsLastRow++;
-  }
-  return data;
-};

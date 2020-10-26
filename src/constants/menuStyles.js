@@ -7,22 +7,16 @@ export default StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
   },
-  itemSelected: {
-    backgroundColor: '#023e71',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    margin: 3,
-    height: Dimensions.get('window').width / 2 - 10, // approximate a square
-  },
-  itemNotSelected: {
+  item: {
     backgroundColor: 'gray',
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: 15,
     flex: 1,
-    margin: 3,
-    height: Dimensions.get('window').width / 2 - 10, // approximate a square
+    margin: 4,
+    height: Dimensions.get('window').width / 2 - 50,
   },
+
   itemInvisible: {
     backgroundColor: 'transparent',
   },

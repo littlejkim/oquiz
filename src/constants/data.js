@@ -8,6 +8,7 @@ export const quizData = {
     {id: 5, menu: 'burrito'},
     {id: 6, menu: 'john'},
     {id: 7, menu: 'ramen'},
+    {id: 8, menu: 'jacob'},
   ],
   best: [
     {id: 0, menu: 'best'},
@@ -30,3 +31,13 @@ export const quizData = {
     {id: 7, menu: 'ramen'},
   ],
 };
+
+export const quizTypes = [
+  {id: 0, quizType: 'truefalse'},
+  {id: 1, quizType: '2multiplechoice'},
+  {id: 2, quizType: '4multiplechoice'},
+  {id: 3, quizType: 'thisorthat'},
+  {id: 4, quizType: 'thisorthat'},
+  {id: 5, quizType: 'thisorthat'},
+  {id: 6, quizType: 'thisorthat'},
+];
