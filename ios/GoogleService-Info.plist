@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>299355764684-l4t6756e72k587e9c69opae01ods08ir.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.299355764684-l4t6756e72k587e9c69opae01ods08ir</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>299355764684-tfnliscc6gi7rcfup7eu37frv02hiv4g.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDKQjUVHivvYC2_kJ4pUCe0DoJI15YfCzM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>299355764684</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.oquiz</string>
+	<key>PROJECT_ID</key>
+	<string>oquiz-8f2d2</string>
+	<key>STORAGE_BUCKET</key>
+	<string>oquiz-8f2d2.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:299355764684:ios:dd11ba7e1cb71f2b700f69</string>
+	<key>DATABASE_URL</key>
+	<string>https://oquiz-8f2d2.firebaseio.com</string>
+</dict>
+</plist>
