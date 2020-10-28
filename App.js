@@ -5,7 +5,6 @@ import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './src/screens/HomeScreen';
 import MenuScreen from './src/screens/MenuScreen';
 import CreateScreen from './src/screens/CreateScreen';
-
 const Stack = createStackNavigator();
 
 export default function App() {

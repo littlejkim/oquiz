@@ -15,7 +15,7 @@ export default function All({navigation}) {
     <FlatList
       ref={ref}
       keyExtractor={(item) => item.id.toString()}
-      data={quizData.all}
+      data={quizData}
       style={[styles.container, {backgroundColor: '#303857'}]}
       renderItem={({item, index}) => {
         return (

@@ -1,21 +1,19 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
-
-import {quizData} from '../constants/data';
 import MenuNavigation from '../navigation/MenuNavigation';
 import styles from '../constants/styles';
 
+
 export const MenuContext = React.createContext();
 
-export default function MenuScreen({navigation}) {
-  const select = () => {
-    console.log('selected');
-  };
+export default function MenuScreen({route,navigation}) {
+  const {quizData} = route.params;
 
   const pick = (evt) => {
     console.log('Selected: ' + JSON.stringify(evt));
     alert(evt.item.title + ' selected');
   };
+
   return (
     <MenuContext.Provider value={{quizData, pick}}>
       <View style={styles.container}>
