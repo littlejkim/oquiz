@@ -7,9 +7,10 @@ export default function All() {
   const {quizData, pick} = React.useContext(MenuContext);
   return (
     <FlatList
-      extraData={quizData.new}
+      // extraData={quizData.new}
       keyExtractor={(item) => item.id.toString()}
-      data={formatData(quizData.new)}
+      // data={formatData(quizData.new)}
+      data={quizData}
       style={styles.container}
       renderItem={({item, index}) => {
         return (
@@ -23,7 +24,7 @@ export default function All() {
               });
             }}>
             <Text style={styles.itemText}>
-              {item.id}_{item.menu}
+              {item.id}_{item.quizType}
             </Text>
           </TouchableOpacity>
         );

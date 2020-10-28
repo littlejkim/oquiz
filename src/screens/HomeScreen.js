@@ -1,8 +1,16 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {View, Text, Button, TouchableOpacity} from 'react-native';
 import styles from '../constants/styles';
+import {getQuizzes} from '../utils/Db';
+export default function HomeScreen({route,navigation}) {
+  //get all quizzes
+  let quizzes = []
+  useEffect(() => {
+    getQuizzes().then((quiz)=>{
+      quizzes = quiz
+    }); 
+  });
 
-export default function HomeScreen({navigation}) {
   return (
     <View style={styles.container}>
       <View style={styles.mainContent}>
@@ -12,7 +20,7 @@ export default function HomeScreen({navigation}) {
         <TouchableOpacity
           style={styles.footerMainButton}
           activeOpacity={0.7}
-          onPress={() => navigation.navigate('Menu')}>
+          onPress={() => navigation.navigate('Menu',{quizData:quizzes})}>
           <Text style={styles.footerMainText}>퀴즈 구경하기</Text>
         </TouchableOpacity>
         <TouchableOpacity

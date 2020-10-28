@@ -8,7 +8,8 @@ export default function All() {
   return (
     <FlatList
       keyExtractor={(item) => item.id.toString()}
-      data={quizData.all}
+      // data={quizData.all}
+      data={quizData}
       style={styles.container}
       renderItem={({item, index}) => {
         return (
@@ -22,7 +23,7 @@ export default function All() {
               });
             }}>
             <Text style={styles.itemText}>
-              {item.id}_{item.menu}
+            {item.id}_{item.quizType}
             </Text>
           </TouchableOpacity>
         );
