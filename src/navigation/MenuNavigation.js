@@ -13,9 +13,13 @@ export default function MenuNavigation() {
     <Tab.Navigator
       tabBarOptions={{
         labelStyle: {fontSize: 15},
-        // tabStyle: {width: 100},
-        style: {backgroundColor: 'white'},
+        style: {backgroundColor: '#303857'},
+        activeTintColor: 'white',
+        pressOpacity: 0.5,
+        indicatorStyle: {backgroundColor: '#ffe200'},
       }}
+      // style={{backgroundColor: '#303857'}}
+      tabBarPosition="top"
       swipeVelocityImpact={0.4}
       initialLayout={{width: Dimensions.get('window').width}}>
       <Tab.Screen name="전체" component={All} />

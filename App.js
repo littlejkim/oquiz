@@ -14,14 +14,14 @@ export default function App() {
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{
-          headerTintColor: 'black',
-          headerStyle: {backgroundColor: '#fff'},
+          headerTintColor: 'white',
+          headerStyle: {backgroundColor: '#303857'},
           headerBackTitleVisible: false,
         }}>
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{title: 'Home'}}
+          options={{title: '홈'}}
         />
         <Stack.Screen
           name="Menu"

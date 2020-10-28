@@ -5,8 +5,16 @@ import styles from '../constants/styles';
 export default function HomeScreen({navigation}) {
   return (
     <View style={styles.container}>
-      <View style={styles.mainContent}>
-        <Text>Hi</Text>
+      <View style={[styles.mainContent, {justifyContent: 'center'}]}>
+        <Text
+          style={{
+            textAlign: 'left',
+            color: 'white',
+            fontSize: 40,
+            margin: 30,
+          }}>
+          안녕하십니까, {'\n'}카카오증권입니다. {'\n'}오늘도 좋은 하루되세요!
+        </Text>
       </View>
       <View style={styles.footer}>
         <TouchableOpacity

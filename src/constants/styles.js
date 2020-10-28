@@ -3,13 +3,15 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#303857',
   },
   mainContent: {
     flex: 5,
+    backgroundColor: '#303857',
   },
   footer: {
     flex: 1,
+    backgroundColor: '#303857',
     marginBottom: 20,
     marginStart: 20,
     marginEnd: 20,
@@ -18,7 +20,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#6495ED',
+    backgroundColor: '#ffe200',
     borderRadius: 50,
   },
   footerSubButton: {
@@ -29,11 +31,11 @@ export default StyleSheet.create({
   },
   footerMainText: {
     fontSize: 17,
-    color: '#fff',
+    color: 'black',
   },
   footerSubtext: {
     fontSize: 16,
     textDecorationLine: 'underline',
-    color: 'grey',
+    color: 'white',
   },
 });

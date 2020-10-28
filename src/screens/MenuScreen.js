@@ -14,6 +14,7 @@ export default function MenuScreen({navigation}) {
 
   const pick = (evt) => {
     console.log('Selected: ' + JSON.stringify(evt));
+    alert(evt.item.title + ' selected');
   };
   return (
     <MenuContext.Provider value={{quizData, pick}}>
