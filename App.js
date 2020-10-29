@@ -14,7 +14,7 @@ export default function App() {
         initialRouteName="Home"
         screenOptions={{
           headerTintColor: 'white',
-          headerStyle: {backgroundColor: '#303857'},
+          headerStyle: {backgroundColor: '#303857', shadowColor: 'transparent'},
           headerBackTitleVisible: false,
         }}>
         <Stack.Screen

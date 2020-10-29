@@ -1,14 +1,19 @@
-import React,{useEffect} from 'react';
-import {View, Text, Button, TouchableOpacity} from 'react-native';
+import React, {useEffect} from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
+
 import styles from '../constants/styles';
 import {getQuizzes} from '../utils/Db';
-export default function HomeScreen({route,navigation}) {
+export default function HomeScreen({route, navigation}) {
   //get all quizzes
-  let quizzes = []
+  let quizzes = [];
   useEffect(() => {
-    getQuizzes().then((quiz)=>{
-      quizzes = quiz
-    }); 
+    getQuizzes().then((quiz) => {
+      quizzes = quiz;
+    });
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 1000);
   });
 
   return (
@@ -28,7 +33,7 @@ export default function HomeScreen({route,navigation}) {
         <TouchableOpacity
           style={styles.footerMainButton}
           activeOpacity={0.7}
-          onPress={() => navigation.navigate('Menu',{quizData:quizzes})}>
+          onPress={() => navigation.navigate('Menu', {quizData: quizzes})}>
           <Text style={styles.footerMainText}>퀴즈 구경하기</Text>
         </TouchableOpacity>
         <TouchableOpacity

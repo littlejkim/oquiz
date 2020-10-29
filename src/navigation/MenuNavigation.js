@@ -13,12 +13,11 @@ export default function MenuNavigation() {
     <Tab.Navigator
       tabBarOptions={{
         labelStyle: {fontSize: 15},
-        style: {backgroundColor: '#303857'},
+        style: {backgroundColor: '#303857', marginBottom: 10},
         activeTintColor: 'white',
         pressOpacity: 0.5,
         indicatorStyle: {backgroundColor: '#ffe200'},
       }}
-      // style={{backgroundColor: '#303857'}}
       tabBarPosition="top"
       swipeVelocityImpact={0.4}
       initialLayout={{width: Dimensions.get('window').width}}>

@@ -1,17 +1,53 @@
 import React from 'react';
-import {TouchableOpacity, Text, FlatList} from 'react-native';
+import {TouchableOpacity, Text, FlatList, RefreshControl} from 'react-native';
 import styles from '../../constants/menuStyles';
 import {MenuContext} from '../../screens/MenuScreen';
+import {useScrollToTop} from '@react-navigation/native';
+import {getQuizzes} from '../../utils/Db';
 
-export default function All() {
+const wait = (timeout) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, timeout);
+  });
+};
+
+export default function New({navigation}) {
   const {quizData, pick} = React.useContext(MenuContext);
+
+  const [refreshing, setRefreshing] = React.useState(false);
+  const [quizListData, setQuizListData] = React.useState(quizData);
+  // scroll to top
+  const ref = React.useRef(null);
+  useScrollToTop(ref);
+
+  // pull to refresh
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+    try {
+      getQuizzes().then((quiz) => {
+        wait(1300)
+          .then(() => setRefreshing(false))
+          .then(() => setQuizListData(quiz));
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }, [refreshing]);
+
   return (
     <FlatList
-      // extraData={quizData.new}
+      refreshControl={
+        <RefreshControl
+          progressBackgroundColor="white"
+          tintColor="white"
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+        />
+      }
+      ref={ref}
       keyExtractor={(item) => item.id.toString()}
-      // data={formatData(quizData.new)}
-      data={quizData}
-      style={styles.container}
+      data={quizListData}
+      style={[styles.container, {backgroundColor: '#303857'}]}
       renderItem={({item, index}) => {
         return (
           <TouchableOpacity
@@ -23,9 +59,8 @@ export default function All() {
                 index: index,
               });
             }}>
-            <Text style={styles.itemText}>
-              {item.id}_{item.quizType}
-            </Text>
+            <Text style={styles.itemTitleText}>{item.title}</Text>
+            <Text style={styles.itemDescriptionText}>{item.description} </Text>
           </TouchableOpacity>
         );
       }}
@@ -33,17 +68,3 @@ export default function All() {
     />
   );
 }
-
-const formatData = (data) => {
-  const numColumns = 2;
-  const numberOfFullRows = Math.floor(data.length / numColumns);
-  let numberOfElementsLastRow = data.length - numberOfFullRows * numColumns;
-  while (
-    numberOfElementsLastRow !== numColumns &&
-    numberOfElementsLastRow !== 0
-  ) {
-    data.push({key: `blank-${numberOfElementsLastRow}`, empty: true});
-    numberOfElementsLastRow++;
-  }
-  return data;
-};
