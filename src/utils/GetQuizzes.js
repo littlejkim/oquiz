@@ -203,11 +203,11 @@ async function setDummy(){
       quizType = "4mc"
       recommended = true;
       break;
-    case 2:
+    case 3:
       quizType = "2mc"
       recommended = false;
       break;
-    case 2:
+    case 4:
       quizType = "truefalse"
       recommended = true;
       break;
@@ -228,7 +228,7 @@ async function setDummy(){
         totalcount: Math.floor(Math.random()*100)+1,
       },
       tag:["test"],
-      title:"testTitle"
+      title:"testTitle"+Math.floor(Math.random()*200)+1
 
     }
   ).then(()=>{
