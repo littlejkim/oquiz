@@ -3,18 +3,20 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 
 import styles from '../constants/styles';
-import {getQuizzes} from '../utils/Db';
+import {getQuizzes,setDummy,getBestQuizzes,getRecentQuizzes,getRecommendedQuizzes,getInitialQuizzes} from '../utils/GetQuizzes';
 export default function HomeScreen({route, navigation}) {
   //get all quizzes
-  let quizzes = [];
+  let quizData = {};
   useEffect(() => {
-    getQuizzes().then((quiz) => {
-      quizzes = quiz;
+    getInitialQuizzes(5).then((quiz) => {
+      quizData = quiz;
     });
     setTimeout(() => {
       SplashScreen.hide();
     }, 1000);
   });
+
+
 
   return (
     <View style={styles.container}>
@@ -33,13 +35,14 @@ export default function HomeScreen({route, navigation}) {
         <TouchableOpacity
           style={styles.footerMainButton}
           activeOpacity={0.7}
-          onPress={() => navigation.navigate('Menu', {quizData: quizzes})}>
+          onPress={() => navigation.navigate('Menu', {quizData: quizData})}>
           <Text style={styles.footerMainText}>퀴즈 구경하기</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.footerSubButton}
           activeOpacity={0.7}
-          onPress={() => navigation.navigate('Create')}>
+          // onPress={() => navigation.navigate('Create')}>
+          onPress={() => setDummy()}>
           <Text style={styles.footerSubtext}>퀴즈 만들기</Text>
         </TouchableOpacity>
       </View>

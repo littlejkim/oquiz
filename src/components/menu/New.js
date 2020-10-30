@@ -3,7 +3,7 @@ import {TouchableOpacity, Text, FlatList, RefreshControl} from 'react-native';
 import styles from '../../constants/menuStyles';
 import {MenuContext} from '../../screens/MenuScreen';
 import {useScrollToTop} from '@react-navigation/native';
-import {getQuizzes} from '../../utils/Db';
+import {getQuizzes,refreshRecentQuizzes} from '../../utils/GetQuizzes';
 
 const wait = (timeout) => {
   return new Promise((resolve) => {
@@ -15,7 +15,9 @@ export default function New({navigation}) {
   const {quizData, pick} = React.useContext(MenuContext);
 
   const [refreshing, setRefreshing] = React.useState(false);
-  const [quizListData, setQuizListData] = React.useState(quizData);
+  const [quizListData, setQuizListData] = React.useState(quizData.recent);
+  const [firstDoc,setFirstDoc] = React.useState(quizData.firstDoc['Recent']);
+  const [lastDoc,setLastDoc] = React.useState(quizData.lastDoc['Recent']);
   // scroll to top
   const ref = React.useRef(null);
   useScrollToTop(ref);
@@ -24,10 +26,15 @@ export default function New({navigation}) {
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
     try {
-      getQuizzes().then((quiz) => {
+      refreshRecentQuizzes(firstDoc).then((quiz) => {
         wait(1300)
           .then(() => setRefreshing(false))
-          .then(() => setQuizListData(quiz));
+          .then(() => {
+            if(quiz.list.length != 0){
+              setFirstDoc(quiz.first);
+              setQuizListData(quiz.list.concat(quizListData));
+            }
+          });
       });
     } catch (error) {
       console.error(error);
