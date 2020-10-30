@@ -3,20 +3,26 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 
 import styles from '../constants/styles';
-import {getQuizzes,setDummy,getBestQuizzes,getRecentQuizzes,getRecommendedQuizzes,getInitialQuizzes} from '../utils/GetQuizzes';
+import {
+  getQuizzes,
+  setDummy,
+  getBestQuizzes,
+  getRecentQuizzes,
+  getRecommendedQuizzes,
+  getInitialQuizzes,
+} from '../utils/GetQuizzes';
 export default function HomeScreen({route, navigation}) {
   //get all quizzes
   let quizData = {};
   useEffect(() => {
     getInitialQuizzes(5).then((quiz) => {
       quizData = quiz;
+      console.log('Initial quiz list loaded');
     });
     setTimeout(() => {
       SplashScreen.hide();
-    }, 1000);
+    }, 500);
   });
-
-
 
   return (
     <View style={styles.container}>

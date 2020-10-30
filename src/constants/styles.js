@@ -8,6 +8,7 @@ export default StyleSheet.create({
   mainContent: {
     flex: 5,
     backgroundColor: '#303857',
+    alignItems: 'center',
   },
   footer: {
     flex: 1,

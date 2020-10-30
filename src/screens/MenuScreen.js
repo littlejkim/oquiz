@@ -7,13 +7,9 @@ export const MenuContext = React.createContext();
 
 export default function MenuScreen({route, navigation}) {
   const {quizData} = route.params;
-
-  const pick = (evt) => {
-    console.log('Selected: ' + JSON.stringify(evt));
-  };
-
+  console.log('Menu Screen entered');
   return (
-    <MenuContext.Provider value={{quizData, pick}}>
+    <MenuContext.Provider value={{quizData}}>
       <View style={styles.container}>
         <MenuNavigation />
       </View>

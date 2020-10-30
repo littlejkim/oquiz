@@ -3,7 +3,11 @@ import {TouchableOpacity, Text, FlatList, RefreshControl} from 'react-native';
 import styles from '../../constants/menuStyles';
 import {MenuContext} from '../../screens/MenuScreen';
 import {useScrollToTop} from '@react-navigation/native';
-import {getQuizzes,getRecommendedQuizzes,refreshRecommendedQuizzes} from '../../utils/GetQuizzes';
+import {
+  getQuizzes,
+  getRecommendedQuizzes,
+  refreshRecommendedQuizzes,
+} from '../../utils/GetQuizzes';
 
 const wait = (timeout) => {
   return new Promise((resolve) => {
@@ -16,8 +20,10 @@ export default function All({navigation}) {
 
   const [refreshing, setRefreshing] = React.useState(false);
   const [quizListData, setQuizListData] = React.useState(quizData.recommended);
-  const [firstDoc,setFirstDoc] = React.useState(quizData.firstDoc['Recommended']);
-  const [lastDoc,setLastDoc] = React.useState(quizData.lastDoc['Recommended']);
+  const [firstDoc, setFirstDoc] = React.useState(
+    quizData.firstDoc['Recommended'],
+  );
+  const [lastDoc, setLastDoc] = React.useState(quizData.lastDoc['Recommended']);
   // scroll to top
   const ref = React.useRef(null);
   useScrollToTop(ref);
@@ -31,7 +37,7 @@ export default function All({navigation}) {
         wait(500)
           .then(() => setRefreshing(false))
           .then(() => {
-            if(quiz.list.length != 0){
+            if (quiz.list.length != 0) {
               setFirstDoc(quiz.first);
               setQuizListData(quiz.list.concat(quizListData));
             }
@@ -63,10 +69,7 @@ export default function All({navigation}) {
             style={styles.item}
             activeOpacity={0.7}
             onPress={() => {
-              pick({
-                item: item,
-                index: index,
-              });
+              navigation.navigate('Initial', {item: item});
             }}>
             <Text style={styles.itemTitleText}>{item.title}</Text>
             <Text style={styles.itemDescriptionText}>{item.description} </Text>

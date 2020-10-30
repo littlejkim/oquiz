@@ -5,6 +5,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './src/screens/HomeScreen';
 import MenuScreen from './src/screens/MenuScreen';
 import CreateScreen from './src/screens/CreateScreen';
+import InitialScreen from './src/screens/quiz/InitialScreen';
+import PickerScreen from './src/screens/quiz/PickerScreen';
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -31,6 +34,16 @@ export default function App() {
           name="Create"
           component={CreateScreen}
           options={{title: '퀴즈 만들기'}}
+        />
+        <Stack.Screen
+          name="Initial"
+          component={InitialScreen}
+          options={{title: '입장'}}
+        />
+        <Stack.Screen
+          name="Picker"
+          component={PickerScreen}
+          options={{title: '선택'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
