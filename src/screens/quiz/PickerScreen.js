@@ -37,13 +37,14 @@ export default function PickerScreen({route, navigation}) {
     ignoreAndroidSystemSettings: false,
   };
 
-  const defaultValue = 2;
+  const defaultValue = 0;
   const extractFromPicker = (evt) => {
     console.log('event: ' + evt);
     ReactNativeHapticFeedback.trigger('impactLight', hapticFeedbackOptions);
   };
 
   const nextSelected = () => {
+    ReactNativeHapticFeedback.trigger('impactLight', hapticFeedbackOptions);
     if (questionIndex < 9) {
       console.log('다음');
       setQuestionIndex(questionIndex + 1);
