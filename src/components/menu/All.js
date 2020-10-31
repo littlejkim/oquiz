@@ -1,5 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, Text, FlatList, RefreshControl} from 'react-native';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+
 import styles from '../../constants/menuStyles';
 import {MenuContext} from '../../screens/MenuScreen';
 import {useScrollToTop} from '@react-navigation/native';
@@ -69,6 +71,10 @@ export default function All({navigation}) {
             style={styles.item}
             activeOpacity={0.7}
             onPress={() => {
+              ReactNativeHapticFeedback.trigger('impactLight', {
+                enableVibrateFallback: true,
+                ignoreAndroidSystemSettings: false,
+              });
               navigation.navigate('Initial', {item: item});
             }}>
             <Text style={styles.itemTitleText}>{item.title}</Text>

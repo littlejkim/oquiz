@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 import styles from '../constants/styles';
 import {

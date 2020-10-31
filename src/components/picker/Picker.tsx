@@ -45,15 +45,15 @@ const RADIUS = RADIUS_REL * ITEM_HEIGHT;
 
 interface PickerProps {
   defaultValue: number;
-  values: {value: number; label: string}[];
+  rangeChoices: {value: number; label: string}[];
   extractFromPicker: Function;
 }
 
-const Picker = ({values, defaultValue, extractFromPicker}: PickerProps) => {
+const Picker = ({rangeChoices, defaultValue, extractFromPicker}: PickerProps) => {
   const translateY = useValue(0);
   const maskElement = (
     <Animated.View style={{transform: [{translateY}]}}>
-      {values.map((v, i) => {
+      {rangeChoices.map((v, i) => {
         const y = interpolate(
           divide(sub(translateY, ITEM_HEIGHT * 2), -ITEM_HEIGHT),
           {
@@ -89,11 +89,11 @@ const Picker = ({values, defaultValue, extractFromPicker}: PickerProps) => {
     return call([translateY], translateY => {
       let changed = transYtoIndex(
         parseInt(translateY.toString()),
-        values.length,
+        rangeChoices.length,
       );
       if (value !== changed) {
         value = changed;
-        extractFromPicker(values[value].label);
+        extractFromPicker(rangeChoices[value].label);
       }
     });
   }, []);
@@ -117,7 +117,7 @@ const Picker = ({values, defaultValue, extractFromPicker}: PickerProps) => {
         />
       </View>
       <GestureHandler
-        max={values.length}
+        max={rangeChoices.length}
         value={translateY}
         {...{defaultValue}}
       />
