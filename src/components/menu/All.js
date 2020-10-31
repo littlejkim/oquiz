@@ -34,7 +34,7 @@ export default function All({navigation}) {
     try {
       refreshRecommendedQuizzes(firstDoc).then((quiz) => {
         console.log(quiz.list);
-        wait(500)
+        wait(800)
           .then(() => setRefreshing(false))
           .then(() => {
             if (quiz.list.length != 0) {

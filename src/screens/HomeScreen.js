@@ -15,13 +15,12 @@ export default function HomeScreen({route, navigation}) {
   //get all quizzes
   let quizData = {};
   useEffect(() => {
-    getInitialQuizzes(5).then((quiz) => {
-      quizData = quiz;
-      console.log('Initial quiz list loaded');
-    });
-    setTimeout(() => {
-      SplashScreen.hide();
-    }, 500);
+    getInitialQuizzes(5)
+      .then((quiz) => {
+        quizData = quiz;
+        console.log('Initial quiz list loaded');
+      })
+      .then(() => SplashScreen.hide());
   });
 
   return (
@@ -47,7 +46,6 @@ export default function HomeScreen({route, navigation}) {
         <TouchableOpacity
           style={styles.footerSubButton}
           activeOpacity={0.7}
-          // onPress={() => navigation.navigate('Create')}>
           onPress={() => setDummy()}>
           <Text style={styles.footerSubtext}>퀴즈 만들기</Text>
         </TouchableOpacity>

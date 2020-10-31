@@ -31,11 +31,11 @@ export default StyleSheet.create({
     borderRadius: 20,
   },
   footerMainText: {
-    fontSize: 17,
+    fontSize: 18,
     color: 'black',
   },
   footerSubtext: {
-    fontSize: 16,
+    fontSize: 17,
     textDecorationLine: 'underline',
     color: 'white',
   },

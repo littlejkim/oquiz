@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: 'white',
-    fontSize: 24,
+    fontSize: 27,
     lineHeight: ITEM_HEIGHT,
     textAlign: 'center',
     textAlignVertical: 'center',
@@ -109,8 +109,8 @@ const Picker = ({values, defaultValue, extractFromPicker}: PickerProps) => {
         <View
           style={{
             borderColor: '#ffe200',
-            borderTopWidth: 1,
-            borderBottomWidth: 1,
+            borderTopWidth: 2,
+            borderBottomWidth: 2,
             top: ITEM_HEIGHT * 2,
             height: ITEM_HEIGHT,
           }}

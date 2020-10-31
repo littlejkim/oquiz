@@ -29,7 +29,7 @@ export default function PickerScreen({route, navigation}) {
       <View style={[styles.mainContent, {flex: 10, justifyContent: 'center'}]}>
         <Picker {...{values, defaultValue, extractFromPicker}} />
       </View>
-      <View style={styles.footer}>
+      <View style={[styles.footer, {marginBottom: 40}]}>
         <TouchableOpacity
           style={styles.footerMainButton}
           activeOpacity={0.7}

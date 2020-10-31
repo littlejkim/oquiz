@@ -23,7 +23,7 @@ import Animated, {
   divide,
 } from 'react-native-reanimated';
 import {State} from 'react-native-gesture-handler';
-import {min, snapPoint} from 'react-native-redash';
+import {min, snapPoint} from 'react-native-redash/lib/module/v1';
 
 import {ITEM_HEIGHT} from './Constants';
 
