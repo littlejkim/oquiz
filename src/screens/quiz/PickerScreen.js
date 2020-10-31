@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 
 import styles from '../../constants/styles';
 import Picker from '../../components/picker/Picker';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 export default function PickerScreen({route, navigation}) {
   useEffect(() => {
@@ -10,6 +11,11 @@ export default function PickerScreen({route, navigation}) {
       headerTitle: route.params.title,
     });
   }, []);
+  // haptic feedback options
+  const hapticFeedbackOptions = {
+    enableVibrateFallback: true,
+    ignoreAndroidSystemSettings: false,
+  };
 
   const values = [
     {label: '5000원 이하', value: 0},
@@ -23,6 +29,7 @@ export default function PickerScreen({route, navigation}) {
   const defaultValue = 2;
   const extractFromPicker = (evt) => {
     console.log('event: ' + evt);
+    ReactNativeHapticFeedback.trigger('impactLight', hapticFeedbackOptions);
   };
   return (
     <View style={styles.container}>
