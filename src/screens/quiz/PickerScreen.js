@@ -7,7 +7,8 @@ import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import {rangeChoices} from '../../constants/choices';
 
 export default function PickerScreen({route, navigation}) {
-  const exitAlert = () =>
+  const exitAlert = () => {
+    ReactNativeHapticFeedback.trigger('impactLight', hapticFeedbackOptions);
     Alert.alert(
       '경고',
       '나가시겠습니까?',
@@ -21,6 +22,8 @@ export default function PickerScreen({route, navigation}) {
       ],
       {cancelable: false},
     );
+  };
+
   // exit button
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -34,8 +37,16 @@ export default function PickerScreen({route, navigation}) {
           {...props}
           onPress={() => {
             if (questionIndex > 0) {
+              ReactNativeHapticFeedback.trigger(
+                'impactLight',
+                hapticFeedbackOptions,
+              );
               setQuestionIndex(questionIndex - 1);
             } else {
+              ReactNativeHapticFeedback.trigger(
+                'impactLight',
+                hapticFeedbackOptions,
+              );
               exitAlert();
             }
           }}
