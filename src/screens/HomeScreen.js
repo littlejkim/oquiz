@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
-import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 import styles from '../constants/styles';
 import {
@@ -12,6 +11,7 @@ import {
   getRecommendedQuizzes,
   getInitialQuizzes,
 } from '../utils/GetQuizzes';
+
 export default function HomeScreen({route, navigation}) {
   //get all quizzes
   let quizData = {};
@@ -23,6 +23,11 @@ export default function HomeScreen({route, navigation}) {
       })
       .then(() => SplashScreen.hide());
   });
+
+  const createNewDummy = () => {
+    setDummy();
+    alert('hi');
+  };
 
   return (
     <View style={styles.container}>
@@ -47,7 +52,7 @@ export default function HomeScreen({route, navigation}) {
         <TouchableOpacity
           style={styles.footerSubButton}
           activeOpacity={0.7}
-          onPress={() => setDummy()}>
+          onPress={() => createNewDummy()}>
           <Text style={styles.footerSubtext}>퀴즈 만들기</Text>
         </TouchableOpacity>
       </View>

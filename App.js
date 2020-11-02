@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createStackNavigator, HeaderBackButton} from '@react-navigation/stack';
 
 import HomeScreen from './src/screens/HomeScreen';
 import MenuScreen from './src/screens/MenuScreen';
@@ -19,6 +19,9 @@ export default function App() {
           headerTintColor: 'white',
           headerStyle: {backgroundColor: '#303857', shadowColor: 'transparent'},
           headerBackTitleVisible: false,
+          headerLeftContainerStyle: {padding: 10},
+          cardShadowEnabled: false,
+          cardOverlayEnabled: false,
         }}>
         <Stack.Screen
           name="Home"

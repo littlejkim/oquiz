@@ -221,7 +221,7 @@ async function setDummy() {
   switch (random) {
     case 1:
       quizType = 'thisorthat';
-      recommended = false;
+      recommended = true;
       break;
     case 2:
       quizType = '4mc';
@@ -229,7 +229,7 @@ async function setDummy() {
       break;
     case 3:
       quizType = '2mc';
-      recommended = false;
+      recommended = true;
       break;
     case 4:
       quizType = 'truefalse';
@@ -237,7 +237,7 @@ async function setDummy() {
       break;
     default:
       quizType = 'thisorthat';
-      recommended = false;
+      recommended = true;
       break;
   }
 

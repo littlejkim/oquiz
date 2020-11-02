@@ -109,8 +109,8 @@ const Picker = ({rangeChoices, defaultValue, extractFromPicker}: PickerProps) =>
         <View
           style={{
             borderColor: '#ffe200',
-            borderTopWidth: 2,
-            borderBottomWidth: 2,
+            borderTopWidth: 2.5,
+            borderBottomWidth: 2.5,
             top: ITEM_HEIGHT * 2,
             height: ITEM_HEIGHT,
           }}

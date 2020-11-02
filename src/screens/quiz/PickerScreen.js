@@ -1,12 +1,48 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
-
+import {View, Text, TouchableOpacity, Alert} from 'react-native';
+import {HeaderBackButton} from '@react-navigation/stack';
 import styles from '../../constants/styles';
 import Picker from '../../components/picker/Picker';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import {rangeChoices} from '../../constants/choices';
 
 export default function PickerScreen({route, navigation}) {
+  const exitAlert = () =>
+    Alert.alert(
+      '경고',
+      '나가시겠습니까?',
+      [
+        {
+          text: '취소',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: '예', onPress: () => navigation.pop(2)},
+      ],
+      {cancelable: false},
+    );
+  // exit button
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity style={{marginRight: 20}} onPress={exitAlert}>
+          <Text style={{color: 'white', fontSize: 16}}>나가기</Text>
+        </TouchableOpacity>
+      ),
+      headerLeft: (props) => (
+        <HeaderBackButton
+          {...props}
+          onPress={() => {
+            if (questionIndex > 0) {
+              setQuestionIndex(questionIndex - 1);
+            } else {
+              exitAlert();
+            }
+          }}
+        />
+      ),
+    });
+  });
   useEffect(() => {
     navigation.setOptions({
       headerTitle: route.params.title,
@@ -14,8 +50,8 @@ export default function PickerScreen({route, navigation}) {
   }, []);
 
   const questions = [
-    {value: 0, question: '1. 뭐하고 계세요?'},
-    {value: 1, question: '2. 뭐하고 계세요?'},
+    {value: 0, question: '1. 가장 좋아하는 음식이 어떻게 되세요?'},
+    {value: 1, question: '2. 가장 좋아하는 동물이 어떻게 되세요?'},
     {value: 2, question: '3. 뭐하고 계세요?'},
     {value: 3, question: '4. 뭐하고 계세요?'},
     {value: 4, question: '5. 뭐하고 계세요?'},
@@ -49,19 +85,39 @@ export default function PickerScreen({route, navigation}) {
       console.log('다음');
       setQuestionIndex(questionIndex + 1);
     } else {
+      alert('finished');
       console.log('done');
     }
   };
 
   return (
     <View style={styles.container}>
-      <View style={[styles.mainContent, {flex: 10, justifyContent: 'center'}]}>
-        <View style={{flex: 1, justifyContent: 'flex-end'}}>
-          <Text style={{color: 'white', fontSize: 30, textAlign: 'center'}}>
+      <View
+        style={{
+          flex: 0.1,
+          flexDirection: 'row',
+        }}>
+        <View style={{flex: questionIndex, backgroundColor: '#ffe200'}}></View>
+        <View
+          style={{flex: 9 - questionIndex, backgroundColor: '#303857'}}></View>
+      </View>
+      <View style={[styles.mainContent, {flex: 10}]}>
+        <View
+          style={{
+            flex: 1.5,
+            alignItems: 'flex-start',
+          }}>
+          <Text
+            style={{
+              margin: 30,
+              color: 'white',
+              fontSize: 30,
+              textAlign: 'left',
+            }}>
             {questions[questionIndex].question}
           </Text>
         </View>
-        <View style={{flex: 5, justifyContent: 'center'}}>
+        <View style={{flex: 5, justifyContent: 'center', alignItems: 'center'}}>
           <Picker {...{rangeChoices, defaultValue, extractFromPicker}} />
         </View>
       </View>
