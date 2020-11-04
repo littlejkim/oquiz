@@ -26,7 +26,7 @@ export default function HomeScreen({route, navigation}) {
 
   const createNewDummy = () => {
     setDummy();
-    alert('hi');
+    alert('dummy created');
   };
 
   return (
