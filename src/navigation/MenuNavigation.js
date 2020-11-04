@@ -2,7 +2,7 @@ import React from 'react';
 import {Dimensions} from 'react-native';
 
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import All from '../components/menu/All';
+import Recommended from '../components/menu/Recommended';
 import Best from '../components/menu/Best';
 import New from '../components/menu/New';
 
@@ -21,7 +21,7 @@ export default function MenuNavigation() {
       tabBarPosition="top"
       swipeVelocityImpact={0.4}
       initialLayout={{width: Dimensions.get('window').width}}>
-      <Tab.Screen name="전체" component={All} />
+      <Tab.Screen name="전체" component={Recommended} />
       <Tab.Screen name="베스트" component={Best} />
       <Tab.Screen name="최신" component={New} />
     </Tab.Navigator>

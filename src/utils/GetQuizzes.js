@@ -53,7 +53,6 @@ async function getRecommendedQuizzes(lastDocument, howmany) {
     .limit(howmany)
     .get()
     .then((collection) => {
-      console.log(collection.size);
       collection.forEach((document) => {
         json.push({id: document.id, ...document.data()});
       });
