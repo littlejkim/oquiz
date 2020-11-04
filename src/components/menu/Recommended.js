@@ -27,15 +27,6 @@ export default function All({navigation}) {
   );
   const [lastDoc, setLastDoc] = React.useState(quizData.lastDoc['Recommended']);
 
-  const loadMore = () => {
-    try {
-      getRecommendedQuizzes(lastDoc, 5).then((quiz) => {
-        console.log(quiz.list);
-      });
-    } catch (error) {
-      console.log('error');
-    }
-  };
   // scroll to top
   const ref = React.useRef(null);
   useScrollToTop(ref);
@@ -74,10 +65,6 @@ export default function All({navigation}) {
       keyExtractor={(item) => item.id.toString()}
       data={quizListData}
       style={[styles.container, {backgroundColor: '#303857'}]}
-      onEndReachedThreshold={0.01}
-      onEndReached={(info) => {
-        loadMore();
-      }}
       renderItem={({item, index}) => {
         return (
           <TouchableOpacity

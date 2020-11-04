@@ -3,7 +3,9 @@ import {TouchableOpacity, Text, FlatList, RefreshControl} from 'react-native';
 import styles from '../../constants/menuStyles';
 import {MenuContext} from '../../screens/MenuScreen';
 import {useScrollToTop} from '@react-navigation/native';
-import {getQuizzes,refreshRecentQuizzes} from '../../utils/GetQuizzes';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+
+import {getRecentQuizzes, refreshRecentQuizzes} from '../../utils/GetQuizzes';
 
 const wait = (timeout) => {
   return new Promise((resolve) => {
@@ -16,8 +18,21 @@ export default function New({navigation}) {
 
   const [refreshing, setRefreshing] = React.useState(false);
   const [quizListData, setQuizListData] = React.useState(quizData.recent);
-  const [firstDoc,setFirstDoc] = React.useState(quizData.firstDoc['Recent']);
-  const [lastDoc,setLastDoc] = React.useState(quizData.lastDoc['Recent']);
+  const [firstDoc, setFirstDoc] = React.useState(quizData.firstDoc['Recent']);
+  const [lastDoc, setLastDoc] = React.useState(quizData.lastDoc['Recent']);
+
+  const loadMore = () => {
+    try {
+      getRecentQuizzes(lastDoc, 5).then((quiz) => {
+        setLastDoc(quiz.last);
+        console.log(quiz.last.data().title);
+        setQuizListData(quizListData.concat(quiz.list));
+      });
+    } catch (error) {
+      console.log('error');
+    }
+  };
+
   // scroll to top
   const ref = React.useRef(null);
   useScrollToTop(ref);
@@ -30,7 +45,7 @@ export default function New({navigation}) {
         wait(1300)
           .then(() => setRefreshing(false))
           .then(() => {
-            if(quiz.list.length != 0){
+            if (quiz.list.length != 0) {
               setFirstDoc(quiz.first);
               setQuizListData(quiz.list.concat(quizListData));
             }
@@ -55,16 +70,21 @@ export default function New({navigation}) {
       keyExtractor={(item) => item.id.toString()}
       data={quizListData}
       style={[styles.container, {backgroundColor: '#303857'}]}
+      onEndReachedThreshold={0.01}
+      onEndReached={(info) => {
+        loadMore();
+      }}
       renderItem={({item, index}) => {
         return (
           <TouchableOpacity
             style={styles.item}
             activeOpacity={0.7}
             onPress={() => {
-              pick({
-                item: item,
-                index: index,
+              ReactNativeHapticFeedback.trigger('impactLight', {
+                enableVibrateFallback: true,
+                ignoreAndroidSystemSettings: false,
               });
+              navigation.navigate('Initial', {item: item});
             }}>
             <Text style={styles.itemTitleText}>{item.title}</Text>
             <Text style={styles.itemDescriptionText}>{item.description} </Text>
