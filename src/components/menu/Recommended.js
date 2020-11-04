@@ -43,7 +43,6 @@ export default function All({navigation}) {
     } catch (error) {
       console.error(error);
     }
-    console.log(quizListData);
   }, [refreshing]);
 
   return (

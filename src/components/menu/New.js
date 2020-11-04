@@ -35,7 +35,6 @@ export default function New({navigation}) {
         }
         console.log("firstDoc: "+ quiz.firstDoc.data().title)
         console.log("lastDoc: "+ quiz.lastDoc.data().title);
-        console.log("previous list size: "+ quizListData.length);
         console.log("new list size: "+ quiz.list.length);
         setQuizListData(quiz.list);
       });
@@ -67,7 +66,6 @@ export default function New({navigation}) {
               }
               console.log("firstDoc: "+ quiz.firstDoc.data().title)
               console.log("lastDoc: "+ quiz.lastDoc.data().title);
-              console.log("previous list size: "+ quizListData.length);
               console.log("new list size: "+ quiz.list.length);
               setQuizListData(quiz.list);
             }
