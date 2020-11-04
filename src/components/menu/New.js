@@ -41,13 +41,13 @@ export default function New({navigation}) {
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
     try {
-      refreshRecentQuizzes(firstDoc).then((quiz) => {
+      refreshRecentQuizzes(lastDoc).then((quiz) => {
         wait(1300)
           .then(() => setRefreshing(false))
           .then(() => {
             if (quiz.list.length != 0) {
               setFirstDoc(quiz.first);
-              setQuizListData(quiz.list.concat(quizListData));
+              setQuizListData(quiz.list);
             }
           });
       });
