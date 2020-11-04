@@ -18,18 +18,29 @@ export default function New({navigation}) {
 
   const [refreshing, setRefreshing] = React.useState(false);
   const [quizListData, setQuizListData] = React.useState(quizData.recent);
-  const [firstDoc, setFirstDoc] = React.useState(quizData.firstDoc['Recent']);
-  const [lastDoc, setLastDoc] = React.useState(quizData.lastDoc['Recent']);
+  const [firstDoc, setFirstDoc] = React.useState(quizData.firstDoc);
+  const [lastDoc, setLastDoc] = React.useState(quizData.lastDoc);
 
   const loadMore = () => {
+    console.log('loadMore');
     try {
-      getRecentQuizzes(lastDoc, 5).then((quiz) => {
-        setLastDoc(quiz.last);
-        console.log(quiz.last.data().title);
-        setQuizListData(quizListData.concat(quiz.list));
+      getRecentQuizzes(firstDoc, quizListData.length).then((quiz) => {
+        if(firstDoc.id !== quiz.firstDoc.id){
+          console.log('firstdoc changed');
+          setFirstDoc(quiz.firstDoc);
+        }
+        if(lastDoc.id !== quiz.lastDoc.id){
+          console.log('lastdoc changed');
+          setLastDoc(quiz.lastDoc);
+        }
+        console.log("firstDoc: "+ quiz.firstDoc.data().title)
+        console.log("lastDoc: "+ quiz.lastDoc.data().title);
+        console.log("previous list size: "+ quizListData.length);
+        console.log("new list size: "+ quiz.list.length);
+        setQuizListData(quiz.list);
       });
     } catch (error) {
-      console.log('error');
+      console.log(error);
     }
   };
 
@@ -41,13 +52,24 @@ export default function New({navigation}) {
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
     try {
-      refreshRecentQuizzes(firstDoc).then((quiz) => {
+      refreshRecentQuizzes(lastDoc).then((quiz) => {
         wait(1300)
           .then(() => setRefreshing(false))
           .then(() => {
             if (quiz.list.length != 0) {
-              setFirstDoc(quiz.first);
-              setQuizListData(quiz.list.concat(quizListData));
+              if(firstDoc.id !== quiz.firstDoc.id){
+                console.log('firstdoc changed');
+                setFirstDoc(quiz.firstDoc);
+              }
+              if(lastDoc.id !== quiz.lastDoc.id){
+                console.log('lastdoc changed');
+                setLastDoc(quiz.lastDoc);
+              }
+              console.log("firstDoc: "+ quiz.firstDoc.data().title)
+              console.log("lastDoc: "+ quiz.lastDoc.data().title);
+              console.log("previous list size: "+ quizListData.length);
+              console.log("new list size: "+ quiz.list.length);
+              setQuizListData(quiz.list);
             }
           });
       });

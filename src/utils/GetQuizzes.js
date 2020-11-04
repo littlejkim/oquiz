@@ -1,162 +1,137 @@
 import firestore from '@react-native-firebase/firestore';
 
-async function getQuizzes() {
+
+//order Quiz/All by result.totalcount. get 'howmany' from top. return type JSON ARRAY
+async function getBestQuizzes(howmany) {
   let json = [];
-
-  //from Quiz collection, get each document and push it in an array
-  await firestore()
-    .collection('Quiz')
-    .get()
-    .then((collection) => {
-      collection.forEach((document) => {
-        json.push({id: document.id, ...document.data()});
-      });
-    });
-
-  //return resulting array
-  return json;
-}
-
-async function getBestQuizzes(lastDocument, howmany) {
-  let json = [];
-  let lastDoc = {};
   //sort in result.totalcount descending order and get 'howmany' items after 'lastDocument'
   await firestore()
-    .collection('Quiz')
+    .collection('AllQuiz')
     .orderBy('result.totalcount', 'desc')
-    .startAfter(lastDocument)
     .limit(howmany)
     .get()
     .then((collection) => {
       collection.forEach((document) => {
         json.push({id: document.id, ...document.data()});
       });
-      lastDoc = collection.docs[collection.docs.length - 1];
     });
 
   //return list and the last and first document of this list
-  return {
-    list: json,
-    last: lastDoc,
-  };
+  return json;
 }
 
-async function getRecommendedQuizzes(lastDocument, howmany) {
+//get all recommended quiz. return type JSON ARRAY
+async function getRecommendedQuizzes() {
+  let json = [];
+
+  await firestore()
+    .collection('RecommendedQuiz')
+    .orderBy('regdate', 'desc')
+    .get()
+    .then((collection) => {
+      collection.forEach((document) => {
+        json.push({id: document.id, ...document.data()});
+      });
+    });
+
+  //return list
+  return json
+}
+
+
+async function getRecentQuizzes(firstDocument, currentcnt) {
+  let json = [];
+  let firstDoc = {};
+  let lastDoc = {};
+  await firestore()
+    .collection('AllQuiz')
+    .orderBy('regdate', 'desc')
+    .startAt(firstDocument)
+    .limit(currentcnt+5)
+    .get()
+    .then((collection) => {
+      collection.forEach((document) => {
+        json.push({id: document.id, ...document.data()});
+      });
+      firstDoc = collection.docs[0];
+      lastDoc = collection.docs[collection.size - 1];
+    });
+
+
+
+  //return list and the first document of this list
+  return {
+    list:json,
+    firstDoc:firstDoc,
+    lastDoc: lastDoc
+  };
+
+}
+
+// async function refreshBestQuizzes(firstDocument) {
+//   let json = [];
+//   let firstDoc = {};
+//   await firestore()
+//     .collection('Quiz')
+//     .orderBy('result.totalcount', 'desc')
+//     .endBefore(firstDocument)
+//     .get()
+//     .then((collection) => {
+//       collection.forEach((document) => {
+//         json.push({id: document.id, ...document.data()});
+//       });
+//       firstDoc = collection.docs[0];
+//     });
+
+//   return {
+//     list: json,
+//     first: firstDoc,
+//   };
+// }
+
+async function refreshRecentQuizzes(lastDocument) {
   let json = [];
   let lastDoc = {};
-  //get all recommended==true. sort in regdate descending order and get 'howmany' items after 'lastDocument'
-  await firestore()
-    .collection('Quiz')
-    .where('recommended', '==', true)
-    .orderBy('regdate', 'desc')
-    .startAfter(lastDocument)
-    .limit(howmany)
-    .get()
-    .then((collection) => {
-      collection.forEach((document) => {
-        json.push({id: document.id, ...document.data()});
-      });
-      lastDoc = collection.docs[collection.docs.length - 1];
-    });
-
-  //return list and the last document of this list
-  return {
-    list: json,
-    last: lastDoc,
-  };
-}
-
-async function getRecentQuizzes(lastDocument, howmany) {
-  let json = [];
-  let lastDoc = {};
-
-  //sort in regdate descending order and get 'howmany' items after 'lastDocument'
-  await firestore()
-    .collection('Quiz')
-    .orderBy('regdate', 'desc')
-    .startAfter(lastDocument)
-    .limit(howmany)
-    .get()
-    .then((collection) => {
-      collection.forEach((document) => {
-        json.push({id: document.id, ...document.data()});
-      });
-      lastDoc = collection.docs[collection.docs.length - 1];
-    });
-
-  //return list and the last document of this list
-  return {
-    list: json,
-    last: lastDoc,
-  };
-}
-
-async function refreshBestQuizzes(firstDocument) {
-  let json = [];
   let firstDoc = {};
-  await firestore()
-    .collection('Quiz')
-    .orderBy('result.totalcount', 'desc')
-    .endBefore(firstDocument)
-    .get()
-    .then((collection) => {
-      collection.forEach((document) => {
-        json.push({id: document.id, ...document.data()});
-      });
-      firstDoc = collection.docs[0];
-    });
-
-  return {
-    list: json,
-    first: firstDoc,
-  };
-}
-
-async function refreshRecentQuizzes(firstDocument) {
-  let json = [];
-  let firstDoc = {};
-  await firestore()
-    .collection('Quiz')
+  if(lastDocument == null || lastDocument == {}){
+    await firestore()
+    .collection('AllQuiz')
     .orderBy('regdate', 'desc')
-    .endBefore(firstDocument)
+    .limit(5)
     .get()
     .then((collection) => {
       collection.forEach((document) => {
         json.push({id: document.id, ...document.data()});
       });
+      lastDoc = collection.docs[collection.size-1];
       firstDoc = collection.docs[0];
-    });
 
+    });
+  } else{
+    await firestore()
+      .collection('AllQuiz')
+      .orderBy('regdate', 'desc')
+      .endAt(lastDocument)
+      .get()
+      .then((collection) => {
+        collection.forEach((document) => {
+          json.push({id: document.id, ...document.data()});
+        });
+        lastDoc = collection.docs[collection.size-1];
+        firstDoc = collection.docs[0];
+    });
+  }
   return {
     list: json,
-    first: firstDoc,
+    lastDoc: lastDoc,
+    firstDoc: firstDoc
   };
 }
 
-async function refreshRecommendedQuizzes(firstDocument) {
-  let json = [];
-  let firstDoc = {};
-  await firestore()
-    .collection('Quiz')
-    .where('recommended', '==', true)
-    .orderBy('regdate', 'desc')
-    .endBefore(firstDocument)
-    .get()
-    .then((collection) => {
-      collection.forEach((document) => {
-        json.push({id: document.id, ...document.data()});
-      });
-      firstDoc = collection.docs[0];
-    });
 
-  return {
-    list: json,
-    first: firstDoc,
-  };
-}
 
 async function getInitialQuizzes(howmany) {
-  let ref = firestore().collection('Quiz');
+  let ref = firestore().collection('AllQuiz')
   let best = [];
   let lastDoc = {};
   let firstDoc = {};
@@ -172,35 +147,29 @@ async function getInitialQuizzes(howmany) {
       collection.forEach((document) => {
         recent.push({id: document.id, ...document.data()});
       });
-      lastDoc['Recent'] = collection.docs[collection.docs.length - 1];
-      firstDoc['Recent'] = collection.docs[0];
+      lastDoc = collection.docs[collection.docs.length - 1];
+      firstDoc = collection.docs[0];
     });
 
   //get all recommended==true. sort in regdate descending order and get 'howmany' items
-  await ref
-    .where('recommended', '==', true)
+  await firestore().collection('RecommendedQuiz')
     .orderBy('regdate', 'desc')
-    .limit(howmany)
     .get()
     .then((collection) => {
       collection.forEach((document) => {
         recommended.push({id: document.id, ...document.data()});
       });
-      lastDoc['Recommended'] = collection.docs[collection.docs.length - 1];
-      firstDoc['Recommended'] = collection.docs[0];
     });
 
   //sort in result.totalcount descending order and get 'howmany' items
   await ref
     .orderBy('result.totalcount', 'desc')
-    .limit(howmany)
+    .limit(100)
     .get()
     .then((collection) => {
       collection.forEach((document) => {
         best.push({id: document.id, ...document.data()});
       });
-      lastDoc['Best'] = collection.docs[collection.docs.length - 1];
-      firstDoc['Best'] = collection.docs[0];
     });
 
   //return best,recent,recommended list and the lastdocs of each
@@ -214,59 +183,68 @@ async function getInitialQuizzes(howmany) {
 }
 
 async function setDummy() {
-  let quizType = '';
-  let recommended = false;
   var random = Math.floor(Math.random() * 4) + 1;
+
+  var data = {
+    description: 'test' + new Date(),
+    imgSrc: 'https://reactjs.org/logo-og.png',
+    quizType: "",
+    recommended: false,
+    regdate: new Date(),
+    result: {
+      totalcount: Math.floor(Math.random() * 100) + 1,
+    },
+    tag: ['test'],
+    title: 'testTitle' + Math.floor(Math.random() * 200) + 1,
+  }
+
   switch (random) {
     case 1:
-      quizType = 'thisorthat';
-      recommended = true;
+      data.quizType = 'thisorthat';
+      data.recommended = false;
       break;
     case 2:
-      quizType = '4mc';
-      recommended = true;
+      data.quizType = '4mc';
+      data.recommended = false;
       break;
     case 3:
-      quizType = '2mc';
-      recommended = true;
+      data.quizType = '2mc';
+      data.recommended = false;
       break;
     case 4:
-      quizType = 'truefalse';
-      recommended = true;
+      data.quizType = 'truefalse';
+      data.recommended = false;
       break;
     default:
-      quizType = 'thisorthat';
-      recommended = true;
+      data.quizType = 'thisorthat';
+      data.recommended = false;
       break;
   }
 
-  await firestore()
-    .collection('Quiz')
-    .add({
-      description: 'test' + new Date(),
-      imgSrc: 'https://reactjs.org/logo-og.png',
-      quizType: quizType,
-      recommended: recommended,
-      regdate: new Date(),
-      result: {
-        totalcount: Math.floor(Math.random() * 100) + 1,
-      },
-      tag: ['test'],
-      title: 'testTitle' + Math.floor(Math.random() * 200) + 1,
-    })
+
+
+  await firestore().collection('AllQuiz')
+    .add(data)
     .then(() => {
-      console.log('dummy added');
+      console.log('dummy added to AllQuiz');
     });
+
+  if(data.recommended == true){
+    await firestore().collection('RecommendedQuiz')
+    .add(data)
+    .then(() => {
+      console.log('dummy added to RecommendedQuiz');
+    });
+  }
+
+
 }
 
 export {
-  getQuizzes,
   setDummy,
   getBestQuizzes,
   getRecentQuizzes,
   getRecommendedQuizzes,
   getInitialQuizzes,
-  refreshBestQuizzes,
   refreshRecentQuizzes,
-  refreshRecommendedQuizzes,
 };

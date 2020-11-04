@@ -6,9 +6,7 @@ import styles from '../../constants/menuStyles';
 import {MenuContext} from '../../screens/MenuScreen';
 import {useScrollToTop} from '@react-navigation/native';
 import {
-  getQuizzes,
   getRecommendedQuizzes,
-  refreshRecommendedQuizzes,
 } from '../../utils/GetQuizzes';
 
 const wait = (timeout) => {
@@ -22,10 +20,8 @@ export default function All({navigation}) {
 
   const [refreshing, setRefreshing] = React.useState(false);
   const [quizListData, setQuizListData] = React.useState(quizData.recommended);
-  const [firstDoc, setFirstDoc] = React.useState(
-    quizData.firstDoc['Recommended'],
-  );
-  const [lastDoc, setLastDoc] = React.useState(quizData.lastDoc['Recommended']);
+
+
 
   // scroll to top
   const ref = React.useRef(null);
@@ -35,13 +31,12 @@ export default function All({navigation}) {
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
     try {
-      refreshRecommendedQuizzes(firstDoc).then((quiz) => {
+      getRecommendedQuizzes().then((quiz) => {
         wait(800)
           .then(() => setRefreshing(false))
           .then(() => {
             if (quiz.list.length != 0) {
-              setFirstDoc(quiz.first);
-              setQuizListData(quiz.list.concat(quizListData));
+              setQuizListData(quiz);
             }
           });
       });
