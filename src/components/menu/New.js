@@ -26,15 +26,19 @@ export default function New({navigation}) {
     try {
       getRecentQuizzes(firstDoc, quizListData.length).then((quiz) => {
         if(firstDoc.id !== quiz.firstDoc.id){
-          console.log('firstdoc changed');
+          console.log("firstDoc: "+ firstDoc.data().title+ " -> " + quiz.firstDoc.data().title)
           setFirstDoc(quiz.firstDoc);
+        } else{
+          console.log("firstDoc: "+ quiz.firstDoc.data().title)
         }
+
         if(lastDoc.id !== quiz.lastDoc.id){
-          console.log('lastdoc changed');
+          console.log("lastDoc: "+ firstDoc.data().title+" -> "+quiz.lastDoc.data().title);
           setLastDoc(quiz.lastDoc);
+        } else{
+          console.log("lastDoc: "+ quiz.lastDoc.data().title);
         }
-        console.log("firstDoc: "+ quiz.firstDoc.data().title)
-        console.log("lastDoc: "+ quiz.lastDoc.data().title);
+        console.log();
         console.log("new list size: "+ quiz.list.length);
         setQuizListData(quiz.list);
       });
@@ -57,15 +61,19 @@ export default function New({navigation}) {
           .then(() => {
             if (quiz.list.length != 0) {
               if(firstDoc.id !== quiz.firstDoc.id){
-                console.log('firstdoc changed');
+                console.log("firstDoc: "+ firstDoc.data().title+ " -> " + quiz.firstDoc.data().title)
                 setFirstDoc(quiz.firstDoc);
+              } else{
+                console.log("firstDoc: "+ quiz.firstDoc.data().title)
               }
+      
               if(lastDoc.id !== quiz.lastDoc.id){
-                console.log('lastdoc changed');
+                console.log("lastDoc: "+ firstDoc.data().title+" -> "+quiz.lastDoc.data().title);
                 setLastDoc(quiz.lastDoc);
+              } else{
+                console.log("lastDoc: "+ quiz.lastDoc.data().title);
               }
-              console.log("firstDoc: "+ quiz.firstDoc.data().title)
-              console.log("lastDoc: "+ quiz.lastDoc.data().title);
+              console.log();
               console.log("new list size: "+ quiz.list.length);
               setQuizListData(quiz.list);
             }
