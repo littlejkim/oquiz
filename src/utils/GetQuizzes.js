@@ -57,8 +57,6 @@ async function getRecentQuizzes(firstDocument, currentcnt) {
       lastDoc = collection.docs[collection.size - 1];
     });
 
-
-
   //return list and the first document of this list
   return {
     list:json,
@@ -68,31 +66,12 @@ async function getRecentQuizzes(firstDocument, currentcnt) {
 
 }
 
-// async function refreshBestQuizzes(firstDocument) {
-//   let json = [];
-//   let firstDoc = {};
-//   await firestore()
-//     .collection('Quiz')
-//     .orderBy('result.totalcount', 'desc')
-//     .endBefore(firstDocument)
-//     .get()
-//     .then((collection) => {
-//       collection.forEach((document) => {
-//         json.push({id: document.id, ...document.data()});
-//       });
-//       firstDoc = collection.docs[0];
-//     });
-
-//   return {
-//     list: json,
-//     first: firstDoc,
-//   };
-// }
 
 async function refreshRecentQuizzes(lastDocument) {
   let json = [];
   let lastDoc = {};
   let firstDoc = {};
+
   if(lastDocument == null || lastDocument == {}){
     await firestore()
     .collection('AllQuiz')
@@ -164,7 +143,7 @@ async function getInitialQuizzes(howmany) {
   //sort in result.totalcount descending order and get 'howmany' items
   await ref
     .orderBy('result.totalcount', 'desc')
-    .limit(100)
+    .limit(50)
     .get()
     .then((collection) => {
       collection.forEach((document) => {
