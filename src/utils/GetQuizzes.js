@@ -126,7 +126,7 @@ async function getInitialQuizzes(howmany) {
       collection.forEach((document) => {
         recent.push({id: document.id, ...document.data()});
       });
-      lastDoc = collection.docs[collection.docs.length - 1];
+      lastDoc = collection.docs[collection.size - 1];
       firstDoc = collection.docs[0];
     });
 
