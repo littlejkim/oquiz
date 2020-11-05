@@ -16,14 +16,13 @@ export default function HomeScreen({route, navigation}) {
   //get all quizzes
   let quizData = {};
   useEffect(() => {
-    getInitialQuizzes(5)
+    getInitialQuizzes(10)
       .then((quiz) => {
         quizData = quiz;
         console.log('Initial quiz list loaded');
       })
       .then(() => SplashScreen.hide());
   });
-
   const createNewDummy = () => {
     setDummy();
   };

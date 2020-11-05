@@ -5,9 +5,7 @@ import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import styles from '../../constants/menuStyles';
 import {MenuContext} from '../../screens/MenuScreen';
 import {useScrollToTop} from '@react-navigation/native';
-import {
-  getRecommendedQuizzes,
-} from '../../utils/GetQuizzes';
+import {getRecommendedQuizzes} from '../../utils/GetQuizzes';
 
 const wait = (timeout) => {
   return new Promise((resolve) => {
@@ -15,14 +13,12 @@ const wait = (timeout) => {
   });
 };
 
-export default function All({navigation}) {
+export default function Recommended({navigation}) {
   const {quizData, pick} = React.useContext(MenuContext);
 
   const [refreshing, setRefreshing] = React.useState(false);
   const [quizListData, setQuizListData] = React.useState(quizData.recommended);
 
-
-  
   // scroll to top
   const ref = React.useRef(null);
   useScrollToTop(ref);
@@ -35,7 +31,7 @@ export default function All({navigation}) {
         wait(800)
           .then(() => setRefreshing(false))
           .then(() => {
-            if (quiz.list.length != 0) {
+            if (quiz.length != 0) {
               setQuizListData(quiz);
             }
           });

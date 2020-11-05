@@ -1,6 +1,5 @@
 import firestore from '@react-native-firebase/firestore';
 
-
 //order Quiz/All by result.totalcount. get 'howmany' from top. return type JSON ARRAY
 async function getBestQuizzes(howmany) {
   let json = [];
@@ -35,9 +34,8 @@ async function getRecommendedQuizzes() {
     });
 
   //return list
-  return json
+  return json;
 }
-
 
 async function getRecentQuizzes(firstDocument, currentcnt) {
   let json = [];
@@ -47,7 +45,7 @@ async function getRecentQuizzes(firstDocument, currentcnt) {
     .collection('AllQuiz')
     .orderBy('regdate', 'desc')
     .startAt(firstDocument)
-    .limit(currentcnt+5)
+    .limit(currentcnt + 5)
     .get()
     .then((collection) => {
       collection.forEach((document) => {
@@ -59,34 +57,31 @@ async function getRecentQuizzes(firstDocument, currentcnt) {
 
   //return list and the first document of this list
   return {
-    list:json,
-    firstDoc:firstDoc,
-    lastDoc: lastDoc
+    list: json,
+    firstDoc: firstDoc,
+    lastDoc: lastDoc,
   };
-
 }
-
 
 async function refreshRecentQuizzes(lastDocument) {
   let json = [];
   let lastDoc = {};
   let firstDoc = {};
 
-  if(lastDocument == null || lastDocument == {}){
+  if (lastDocument == null || lastDocument == {}) {
     await firestore()
-    .collection('AllQuiz')
-    .orderBy('regdate', 'desc')
-    .limit(5)
-    .get()
-    .then((collection) => {
-      collection.forEach((document) => {
-        json.push({id: document.id, ...document.data()});
+      .collection('AllQuiz')
+      .orderBy('regdate', 'desc')
+      .limit(5)
+      .get()
+      .then((collection) => {
+        collection.forEach((document) => {
+          json.push({id: document.id, ...document.data()});
+        });
+        lastDoc = collection.docs[collection.size - 1];
+        firstDoc = collection.docs[0];
       });
-      lastDoc = collection.docs[collection.size-1];
-      firstDoc = collection.docs[0];
-
-    });
-  } else{
+  } else {
     await firestore()
       .collection('AllQuiz')
       .orderBy('regdate', 'desc')
@@ -96,21 +91,19 @@ async function refreshRecentQuizzes(lastDocument) {
         collection.forEach((document) => {
           json.push({id: document.id, ...document.data()});
         });
-        lastDoc = collection.docs[collection.size-1];
+        lastDoc = collection.docs[collection.size - 1];
         firstDoc = collection.docs[0];
-    });
+      });
   }
   return {
     list: json,
     lastDoc: lastDoc,
-    firstDoc: firstDoc
+    firstDoc: firstDoc,
   };
 }
 
-
-
 async function getInitialQuizzes(howmany) {
-  let ref = firestore().collection('AllQuiz')
+  let ref = firestore().collection('AllQuiz');
   let best = [];
   let lastDoc = {};
   let firstDoc = {};
@@ -131,7 +124,8 @@ async function getInitialQuizzes(howmany) {
     });
 
   //get all recommended==true. sort in regdate descending order and get 'howmany' items
-  await firestore().collection('RecommendedQuiz')
+  await firestore()
+    .collection('RecommendedQuiz')
     .orderBy('regdate', 'desc')
     .get()
     .then((collection) => {
@@ -167,7 +161,7 @@ async function setDummy() {
   var data = {
     description: 'test' + new Date(),
     imgSrc: 'https://reactjs.org/logo-og.png',
-    quizType: "",
+    quizType: '',
     recommended: false,
     regdate: new Date(),
     result: {
@@ -175,7 +169,7 @@ async function setDummy() {
     },
     tag: ['test'],
     title: 'testTitle' + Math.floor(Math.random() * 200) + 1,
-  }
+  };
 
   switch (random) {
     case 1:
@@ -200,23 +194,21 @@ async function setDummy() {
       break;
   }
 
-
-
-  await firestore().collection('AllQuiz')
+  await firestore()
+    .collection('AllQuiz')
     .add(data)
     .then(() => {
       console.log('dummy added to AllQuiz');
     });
 
-  if(data.recommended == true){
-    await firestore().collection('RecommendedQuiz')
-    .add(data)
-    .then(() => {
-      console.log('dummy added to RecommendedQuiz');
-    });
+  if (data.recommended == true) {
+    await firestore()
+      .collection('RecommendedQuiz')
+      .add(data)
+      .then(() => {
+        console.log('dummy added to RecommendedQuiz');
+      });
   }
-
-
 }
 
 export {
