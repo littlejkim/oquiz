@@ -1,5 +1,11 @@
 import React from 'react';
-import {TouchableOpacity, Text, FlatList, RefreshControl} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  FlatList,
+  RefreshControl,
+} from 'react-native';
 import styles from '../../constants/menuStyles';
 import {MenuContext} from '../../screens/MenuScreen';
 import {useScrollToTop} from '@react-navigation/native';
@@ -25,20 +31,30 @@ export default function New({navigation}) {
     console.log('loadMore');
     try {
       getRecentQuizzes(firstDoc, quizListData.length).then((quiz) => {
-        if(firstDoc.id !== quiz.firstDoc.id){
-          console.log("firstDoc: "+ firstDoc.data().title+ " -> " + quiz.firstDoc.data().title)
+        if (firstDoc.id !== quiz.firstDoc.id) {
+          console.log(
+            'firstDoc: ' +
+              firstDoc.data().title +
+              ' -> ' +
+              quiz.firstDoc.data().title,
+          );
           setFirstDoc(quiz.firstDoc);
-        } else{
-          console.log("firstDoc: "+ quiz.firstDoc.data().title)
+        } else {
+          console.log('firstDoc: ' + quiz.firstDoc.data().title);
         }
 
-        if(lastDoc.id !== quiz.lastDoc.id){
-          console.log("lastDoc: "+ lastDoc.data().title+" -> "+quiz.lastDoc.data().title);
+        if (lastDoc.id !== quiz.lastDoc.id) {
+          console.log(
+            'lastDoc: ' +
+              lastDoc.data().title +
+              ' -> ' +
+              quiz.lastDoc.data().title,
+          );
           setLastDoc(quiz.lastDoc);
-        } else{
-          console.log("lastDoc: "+ quiz.lastDoc.data().title);
+        } else {
+          console.log('lastDoc: ' + quiz.lastDoc.data().title);
         }
-        console.log("new list size: "+ quiz.list.length);
+        console.log('new list size: ' + quiz.list.length);
         setQuizListData(quiz.list);
       });
     } catch (error) {
@@ -52,8 +68,7 @@ export default function New({navigation}) {
 
   // pull to refresh
   const onRefresh = React.useCallback(async () => {
-
-    console.log("refresh lastDoc: "+lastDoc.data().title)
+    console.log('refresh lastDoc: ' + lastDoc.data().title);
     setRefreshing(true);
     try {
       refreshRecentQuizzes(lastDoc).then((quiz) => {
@@ -61,20 +76,30 @@ export default function New({navigation}) {
           .then(() => setRefreshing(false))
           .then(() => {
             if (quiz.list.length != 0) {
-              if(firstDoc.id !== quiz.firstDoc.id){
-                console.log("firstDoc: "+ firstDoc.data().title+ " -> " + quiz.firstDoc.data().title)
+              if (firstDoc.id !== quiz.firstDoc.id) {
+                console.log(
+                  'firstDoc: ' +
+                    firstDoc.data().title +
+                    ' -> ' +
+                    quiz.firstDoc.data().title,
+                );
                 setFirstDoc(quiz.firstDoc);
-              } else{
-                console.log("firstDoc: "+ quiz.firstDoc.data().title)
+              } else {
+                console.log('firstDoc: ' + quiz.firstDoc.data().title);
               }
-      
-              if(lastDoc.id !== quiz.lastDoc.id){
-                console.log("lastDoc: "+ lastDoc.data().title+" -> "+quiz.lastDoc.data().title);
+
+              if (lastDoc.id !== quiz.lastDoc.id) {
+                console.log(
+                  'lastDoc: ' +
+                    lastDoc.data().title +
+                    ' -> ' +
+                    quiz.lastDoc.data().title,
+                );
                 setLastDoc(quiz.lastDoc);
-              } else{
-                console.log("lastDoc: "+ quiz.lastDoc.data().title);
+              } else {
+                console.log('lastDoc: ' + quiz.lastDoc.data().title);
               }
-              console.log("new list size: "+ quiz.list.length);
+              console.log('new list size: ' + quiz.list.length);
               setQuizListData(quiz.list);
             }
           });
@@ -82,8 +107,7 @@ export default function New({navigation}) {
     } catch (error) {
       console.error(error);
     }
-  }, [refreshing,lastDoc]);
-
+  }, [refreshing, lastDoc]);
   return (
     <FlatList
       refreshControl={

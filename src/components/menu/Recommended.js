@@ -1,5 +1,11 @@
 import React from 'react';
-import {TouchableOpacity, Text, FlatList, RefreshControl} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  FlatList,
+  RefreshControl,
+} from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 import styles from '../../constants/menuStyles';
@@ -40,7 +46,6 @@ export default function Recommended({navigation}) {
       console.error(error);
     }
   }, [refreshing]);
-
   return (
     <FlatList
       refreshControl={
