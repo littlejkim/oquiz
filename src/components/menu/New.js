@@ -33,12 +33,11 @@ export default function New({navigation}) {
         }
 
         if(lastDoc.id !== quiz.lastDoc.id){
-          console.log("lastDoc: "+ firstDoc.data().title+" -> "+quiz.lastDoc.data().title);
+          console.log("lastDoc: "+ lastDoc.data().title+" -> "+quiz.lastDoc.data().title);
           setLastDoc(quiz.lastDoc);
         } else{
           console.log("lastDoc: "+ quiz.lastDoc.data().title);
         }
-        console.log();
         console.log("new list size: "+ quiz.list.length);
         setQuizListData(quiz.list);
       });
@@ -53,6 +52,8 @@ export default function New({navigation}) {
 
   // pull to refresh
   const onRefresh = React.useCallback(async () => {
+
+    console.log("refresh lastDoc: "+lastDoc.data().title)
     setRefreshing(true);
     try {
       refreshRecentQuizzes(lastDoc).then((quiz) => {
@@ -68,12 +69,11 @@ export default function New({navigation}) {
               }
       
               if(lastDoc.id !== quiz.lastDoc.id){
-                console.log("lastDoc: "+ firstDoc.data().title+" -> "+quiz.lastDoc.data().title);
+                console.log("lastDoc: "+ lastDoc.data().title+" -> "+quiz.lastDoc.data().title);
                 setLastDoc(quiz.lastDoc);
               } else{
                 console.log("lastDoc: "+ quiz.lastDoc.data().title);
               }
-              console.log();
               console.log("new list size: "+ quiz.list.length);
               setQuizListData(quiz.list);
             }
@@ -82,7 +82,7 @@ export default function New({navigation}) {
     } catch (error) {
       console.error(error);
     }
-  }, [refreshing]);
+  }, [refreshing,lastDoc]);
 
   return (
     <FlatList

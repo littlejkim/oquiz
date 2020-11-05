@@ -22,7 +22,7 @@ export default function All({navigation}) {
   const [quizListData, setQuizListData] = React.useState(quizData.recommended);
 
 
-
+  
   // scroll to top
   const ref = React.useRef(null);
   useScrollToTop(ref);
