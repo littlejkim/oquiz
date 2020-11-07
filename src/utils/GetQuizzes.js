@@ -174,15 +174,15 @@ async function setDummy() {
   switch (random) {
     case 1:
       data.quizType = 'thisorthat';
-      data.recommended = false;
+      data.recommended = true;
       break;
     case 2:
       data.quizType = '4mc';
-      data.recommended = false;
+      data.recommended = true;
       break;
     case 3:
       data.quizType = '2mc';
-      data.recommended = false;
+      data.recommended = true;
       break;
     case 4:
       data.quizType = 'truefalse';

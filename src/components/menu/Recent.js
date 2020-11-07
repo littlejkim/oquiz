@@ -55,11 +55,9 @@ export default function Recent({navigation}) {
     }
   };
 
-  // scroll to top
+  // pull to refresh
   const ref = React.useRef(null);
   useScrollToTop(ref);
-
-  // pull to refresh
   const onRefresh = React.useCallback(async () => {
     console.log('refresh lastDoc: ' + lastDoc.data().title);
     setRefreshing(true);
@@ -114,7 +112,7 @@ export default function Recent({navigation}) {
       ref={ref}
       keyExtractor={(item) => item.id.toString()}
       data={recent}
-      style={[styles.container, {backgroundColor: '#303857'}]}
+      style={styles.container}
       onEndReachedThreshold={0.01}
       onEndReached={(info) => {
         loadMore();

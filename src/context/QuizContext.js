@@ -6,10 +6,11 @@ const QuizContext = React.createContext(null);
 
 const QuizProvider = ({children}) => {
   const [best, setBest] = useState();
-  const [recent, setRecent] = useState({});
+  const [recent, setRecent] = useState();
   const [recommended, setRecommended] = useState();
   const [firstDoc, setFirstDoc] = useState();
   const [lastDoc, setLastDoc] = useState();
+
   useEffect(() => {
     getInitialQuizzes(10)
       .then((quiz) => {
@@ -26,6 +27,7 @@ const QuizProvider = ({children}) => {
       })
       .then(() => SplashScreen.hide());
   }, []);
+
   const store = {
     best,
     setBest,

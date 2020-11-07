@@ -45,7 +45,7 @@ export default function Recommended({navigation}) {
       ref={ref}
       keyExtractor={(item) => item.id.toString()}
       data={recommended}
-      style={[styles.container, {backgroundColor: '#303857'}]}
+      style={styles.container}
       renderItem={({item, index}) => {
         return (
           <TouchableOpacity
