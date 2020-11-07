@@ -63,7 +63,7 @@ export default function Recent({navigation}) {
     setRefreshing(true);
     try {
       refreshRecentQuizzes(lastDoc).then((quiz) => {
-        wait(1300)
+        wait()
           .then(() => setRefreshing(false))
           .then(() => {
             if (quiz.list.length != 0) {

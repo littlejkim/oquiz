@@ -19,7 +19,7 @@ export default function Recommended({navigation}) {
     setRefreshing(true);
     try {
       getRecommendedQuizzes().then((quiz) => {
-        wait(800)
+        wait()
           .then(() => setRefreshing(false))
           .then(() => {
             if (quiz.length != 0) {

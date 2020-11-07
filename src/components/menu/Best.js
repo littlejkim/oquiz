@@ -19,7 +19,7 @@ export default function Best({navigation}) {
     setRefreshing(true);
     try {
       getBestQuizzes(50).then((quiz) => {
-        wait(1300)
+        wait()
           .then(() => setRefreshing(false))
           .then(() => {
             if (quiz.list.length != 0) {

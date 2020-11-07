@@ -10,9 +10,9 @@ function transYtoIndex(transY, length) {
     return Math.round(x / 100);
   }
 }
-const wait = (timeout) => {
+const wait = () => {
   return new Promise((resolve) => {
-    setTimeout(resolve, timeout);
+    setTimeout(resolve, 1000);
   });
 };
 
