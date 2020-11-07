@@ -99,6 +99,7 @@ export default function Recent({navigation}) {
       console.error(error);
     }
   }, [refreshing, lastDoc]);
+
   return (
     <FlatList
       refreshControl={

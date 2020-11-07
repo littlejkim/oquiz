@@ -12,11 +12,9 @@ export default function Best({navigation}) {
   const {best, setBest} = React.useContext(QuizContext);
   const [refreshing, setRefreshing] = React.useState(false);
 
-  // scroll to top
+  // pull to refresh
   const ref = React.useRef(null);
   useScrollToTop(ref);
-
-  // pull to refresh
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
     try {
