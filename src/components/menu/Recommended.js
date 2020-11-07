@@ -1,35 +1,20 @@
 import React from 'react';
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  FlatList,
-  RefreshControl,
-} from 'react-native';
+import {TouchableOpacity, Text, FlatList, RefreshControl} from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import {useScrollToTop} from '@react-navigation/native';
 
 import styles from '../../constants/menuStyles';
-import {MenuContext} from '../../screens/MenuScreen';
-import {useScrollToTop} from '@react-navigation/native';
 import {getRecommendedQuizzes} from '../../utils/GetQuizzes';
-
-const wait = (timeout) => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, timeout);
-  });
-};
+import {QuizContext} from '../../context/QuizContext';
+import {wait} from '../../utils/otherFunctions';
 
 export default function Recommended({navigation}) {
-  const {quizData, pick} = React.useContext(MenuContext);
-
+  const {recommended, setRecommended} = React.useContext(QuizContext);
   const [refreshing, setRefreshing] = React.useState(false);
-  const [quizListData, setQuizListData] = React.useState(quizData.recommended);
-
-  // scroll to top
-  const ref = React.useRef(null);
-  useScrollToTop(ref);
 
   // pull to refresh
+  const ref = React.useRef(null);
+  useScrollToTop(ref);
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
     try {
@@ -38,7 +23,7 @@ export default function Recommended({navigation}) {
           .then(() => setRefreshing(false))
           .then(() => {
             if (quiz.length != 0) {
-              setQuizListData(quiz);
+              setRecommended(quiz);
             }
           });
       });
@@ -46,6 +31,7 @@ export default function Recommended({navigation}) {
       console.error(error);
     }
   }, [refreshing]);
+
   return (
     <FlatList
       refreshControl={
@@ -58,7 +44,7 @@ export default function Recommended({navigation}) {
       }
       ref={ref}
       keyExtractor={(item) => item.id.toString()}
-      data={quizListData}
+      data={recommended}
       style={[styles.container, {backgroundColor: '#303857'}]}
       renderItem={({item, index}) => {
         return (

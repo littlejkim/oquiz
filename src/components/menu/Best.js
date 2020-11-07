@@ -1,21 +1,17 @@
 import React from 'react';
 import {TouchableOpacity, Text, FlatList, RefreshControl} from 'react-native';
-import styles from '../../constants/menuStyles';
-import {MenuContext} from '../../screens/MenuScreen';
 import {useScrollToTop} from '@react-navigation/native';
-import {getBestQuizzes} from '../../utils/GetQuizzes';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
-const wait = (timeout) => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, timeout);
-  });
-};
+import styles from '../../constants/menuStyles';
+import {getBestQuizzes} from '../../utils/GetQuizzes';
+import {QuizContext} from '../../context/QuizContext';
+import {wait} from '../../utils/otherFunctions';
 
 export default function Best({navigation}) {
-  const {quizData, pick} = React.useContext(MenuContext);
-
+  const {best, setBest} = React.useContext(QuizContext);
   const [refreshing, setRefreshing] = React.useState(false);
-  const [quizListData, setQuizListData] = React.useState(quizData.best);
+
   // scroll to top
   const ref = React.useRef(null);
   useScrollToTop(ref);
@@ -28,8 +24,8 @@ export default function Best({navigation}) {
         wait(1300)
           .then(() => setRefreshing(false))
           .then(() => {
-            if(quiz.list.length != 0){
-              setQuizListData(quiz);
+            if (quiz.list.length != 0) {
+              setBest(quiz);
             }
           });
       });
@@ -50,7 +46,7 @@ export default function Best({navigation}) {
       }
       ref={ref}
       keyExtractor={(item) => item.id.toString()}
-      data={quizListData}
+      data={best}
       style={[styles.container, {backgroundColor: '#303857'}]}
       renderItem={({item, index}) => {
         return (
@@ -58,10 +54,11 @@ export default function Best({navigation}) {
             style={styles.item}
             activeOpacity={0.7}
             onPress={() => {
-              pick({
-                item: item,
-                index: index,
+              ReactNativeHapticFeedback.trigger('impactLight', {
+                enableVibrateFallback: true,
+                ignoreAndroidSystemSettings: false,
               });
+              navigation.navigate('Initial', {item: item});
             }}>
             <Text style={styles.itemTitleText}>{item.title}</Text>
             <Text style={styles.itemDescriptionText}>{item.description} </Text>

@@ -1,19 +1,20 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator, HeaderBackButton} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 
 import HomeScreen from './src/screens/HomeScreen';
 import MenuScreen from './src/screens/MenuScreen';
 import CreateScreen from './src/screens/CreateScreen';
 import InitialScreen from './src/screens/quiz/InitialScreen';
 import PickerScreen from './src/screens/quiz/PickerScreen';
-import {StoreProvider} from './src/context/QuizContext';
+
+import {QuizProvider} from './src/context/QuizContext';
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <StoreProvider>
+    <QuizProvider>
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="Home"
@@ -55,6 +56,6 @@ export default function App() {
           />
         </Stack.Navigator>
       </NavigationContainer>
-    </StoreProvider>
+    </QuizProvider>
   );
 }

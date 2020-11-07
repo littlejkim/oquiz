@@ -10,5 +10,10 @@ function transYtoIndex(transY, length) {
     return Math.round(x / 100);
   }
 }
+const wait = (timeout) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, timeout);
+  });
+};
 
-export {transYtoIndex};
+export {transYtoIndex, wait};

@@ -1,59 +1,40 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import SplashScreen from 'react-native-splash-screen';
 
 import styles from '../constants/styles';
-import {
-  getQuizzes,
-  setDummy,
-  getBestQuizzes,
-  getRecentQuizzes,
-  getRecommendedQuizzes,
-  getInitialQuizzes,
-} from '../utils/GetQuizzes';
+import {setDummy} from '../utils/GetQuizzes';
+import {QuizContext} from '../context/QuizContext';
 
-export default function HomeScreen({route, navigation}) {
-  //get all quizzes
-  let quizData = {};
-  useEffect(() => {
-    getInitialQuizzes(10)
-      .then((quiz) => {
-        quizData = quiz;
-        console.log('Initial quiz list loaded');
-      })
-      .then(() => SplashScreen.hide());
-  });
-  const createNewDummy = () => {
-    setDummy();
-  };
-
+export default function HomeScreen({navigation}) {
   return (
-    <View style={styles.container}>
-      <View style={[styles.mainContent, {justifyContent: 'center'}]}>
-        <Text
-          style={{
-            textAlign: 'left',
-            color: 'white',
-            fontSize: 40,
-            margin: 30,
-          }}>
-          안녕하십니까, {'\n'}카카오증권입니다. {'\n'}오늘도 좋은 하루되세요!
-        </Text>
+    <QuizContext.Provider>
+      <View style={styles.container}>
+        <View style={[styles.mainContent, {justifyContent: 'center'}]}>
+          <Text
+            style={{
+              textAlign: 'left',
+              color: 'white',
+              fontSize: 40,
+              margin: 30,
+            }}>
+            안녕하십니까, {'\n'}카카오증권입니다. {'\n'}오늘도 좋은 하루되세요!
+          </Text>
+        </View>
+        <View style={styles.footer}>
+          <TouchableOpacity
+            style={styles.footerMainButton}
+            activeOpacity={0.7}
+            onPress={() => navigation.navigate('Menu')}>
+            <Text style={styles.footerMainText}>퀴즈 구경하기</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.footerSubButton}
+            activeOpacity={0.7}
+            onPress={() => setDummy()}>
+            <Text style={styles.footerSubtext}>퀴즈 만들기</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <View style={styles.footer}>
-        <TouchableOpacity
-          style={styles.footerMainButton}
-          activeOpacity={0.7}
-          onPress={() => navigation.navigate('Menu', {quizData: quizData})}>
-          <Text style={styles.footerMainText}>퀴즈 구경하기</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.footerSubButton}
-          activeOpacity={0.7}
-          onPress={() => createNewDummy()}>
-          <Text style={styles.footerSubtext}>퀴즈 만들기</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </QuizContext.Provider>
   );
 }

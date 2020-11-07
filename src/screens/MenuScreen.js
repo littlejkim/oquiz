@@ -1,22 +1,32 @@
-import React, {useContext} from 'react';
-import {View, RefreshControl} from 'react-native';
-import MenuNavigation from '../navigation/MenuNavigation';
+import React from 'react';
+import {View, Dimensions} from 'react-native';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+
 import styles from '../constants/styles';
+import Recommended from '../components/menu/Recommended';
+import Best from '../components/menu/Best';
+import Recent from '../components/menu/Recent';
 
-import {StoreContext} from '../context/QuizContext';
+const Tab = createMaterialTopTabNavigator();
 
-export const MenuContext = React.createContext();
-
-export default function MenuScreen({route, navigation}) {
-  const state = useContext(StoreContext);
-  // console.log(state.test);
-  const {quizData} = route.params;
-  console.log('Menu Screen entered');
+export default function MenuScreen() {
   return (
-    <MenuContext.Provider value={{quizData}}>
-      <View style={styles.container}>
-        <MenuNavigation />
-      </View>
-    </MenuContext.Provider>
+    <View style={styles.container}>
+      <Tab.Navigator
+        tabBarOptions={{
+          labelStyle: {fontSize: 15},
+          style: {backgroundColor: '#303857', marginBottom: 10},
+          activeTintColor: 'white',
+          pressOpacity: 0.5,
+          indicatorStyle: {backgroundColor: '#ffe200'},
+        }}
+        tabBarPosition="top"
+        swipeVelocityImpact={0.4}
+        initialLayout={{width: Dimensions.get('window').width}}>
+        <Tab.Screen name="최신" component={Recent} />
+        <Tab.Screen name="베스트" component={Best} />
+        <Tab.Screen name="추천" component={Recommended} />
+      </Tab.Navigator>
+    </View>
   );
 }

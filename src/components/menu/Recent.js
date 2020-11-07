@@ -1,36 +1,29 @@
 import React from 'react';
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  FlatList,
-  RefreshControl,
-} from 'react-native';
-import styles from '../../constants/menuStyles';
-import {MenuContext} from '../../screens/MenuScreen';
+import {TouchableOpacity, Text, FlatList, RefreshControl} from 'react-native';
 import {useScrollToTop} from '@react-navigation/native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
+import styles from '../../constants/menuStyles';
 import {getRecentQuizzes, refreshRecentQuizzes} from '../../utils/GetQuizzes';
+import {QuizContext} from '../../context/QuizContext';
+import {wait} from '../../utils/otherFunctions';
 
-const wait = (timeout) => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, timeout);
-  });
-};
-
-export default function New({navigation}) {
-  const {quizData, pick} = React.useContext(MenuContext);
+export default function Recent({navigation}) {
+  const {
+    recent,
+    setRecent,
+    firstDoc,
+    lastDoc,
+    setFirstDoc,
+    setLastDoc,
+  } = React.useContext(QuizContext);
 
   const [refreshing, setRefreshing] = React.useState(false);
-  const [quizListData, setQuizListData] = React.useState(quizData.recent);
-  const [firstDoc, setFirstDoc] = React.useState(quizData.firstDoc);
-  const [lastDoc, setLastDoc] = React.useState(quizData.lastDoc);
 
   const loadMore = () => {
-    console.log('loadMore');
+    console.log('loading more data');
     try {
-      getRecentQuizzes(firstDoc, quizListData.length).then((quiz) => {
+      getRecentQuizzes(firstDoc, recent.length).then((quiz) => {
         if (firstDoc.id !== quiz.firstDoc.id) {
           console.log(
             'firstDoc: ' +
@@ -55,7 +48,7 @@ export default function New({navigation}) {
           console.log('lastDoc: ' + quiz.lastDoc.data().title);
         }
         console.log('new list size: ' + quiz.list.length);
-        setQuizListData(quiz.list);
+        setRecent(quiz.list);
       });
     } catch (error) {
       console.log(error);
@@ -100,7 +93,7 @@ export default function New({navigation}) {
                 console.log('lastDoc: ' + quiz.lastDoc.data().title);
               }
               console.log('new list size: ' + quiz.list.length);
-              setQuizListData(quiz.list);
+              setRecent(quiz.list);
             }
           });
       });
@@ -120,7 +113,7 @@ export default function New({navigation}) {
       }
       ref={ref}
       keyExtractor={(item) => item.id.toString()}
-      data={quizListData}
+      data={recent}
       style={[styles.container, {backgroundColor: '#303857'}]}
       onEndReachedThreshold={0.01}
       onEndReached={(info) => {
