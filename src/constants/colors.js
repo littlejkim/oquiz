@@ -1,7 +1,7 @@
-const PRIMARY_COLOR = 'white';
-const SECONDARY_COLOR = '#68829E';
-const PRIMARY_TEXT_COLOR = '#232F34';
-const SECONDARY_TEXT_COLOR = 'white';
+const PRIMARY_COLOR = '#303857';
+const SECONDARY_COLOR = '#ffe200';
+const PRIMARY_TEXT_COLOR = 'white';
+const SECONDARY_TEXT_COLOR = 'black';
 
 export {
   PRIMARY_COLOR,

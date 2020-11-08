@@ -22,10 +22,10 @@ const wait = () => {
 const ItemSeparator = () => (
   <View
     style={{
-      color: 'grey',
+      color: '#ffe200',
       height: 0.5,
       width: '100%',
-      backgroundColor: 'rgba(0,0,0,0.5)',
+      backgroundColor: '#ffe200',
     }}
   />
 );

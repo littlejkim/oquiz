@@ -23,7 +23,7 @@ export default StyleSheet.create({
     flex: 1,
   },
   itemCount: {
-    color: '#F9AA33',
+    color: '#ffe200',
     fontSize: 24,
     textAlign: 'center',
     fontWeight: 'bold',
