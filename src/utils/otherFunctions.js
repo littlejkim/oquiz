@@ -1,3 +1,6 @@
+import React from 'react';
+import {View} from 'react-native';
+
 function transYtoIndex(transY, length) {
   let x = transY - 200;
   if (x > 0) {
@@ -16,4 +19,14 @@ const wait = () => {
   });
 };
 
-export {transYtoIndex, wait};
+const ItemSeparator = () => (
+  <View
+    style={{
+      height: 1,
+      width: '100%',
+      backgroundColor: 'rgba(0,0,0,0.5)',
+    }}
+  />
+);
+
+export {transYtoIndex, wait, ItemSeparator};

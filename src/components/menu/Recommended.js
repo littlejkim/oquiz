@@ -4,6 +4,7 @@ import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import {useScrollToTop} from '@react-navigation/native';
 
 import styles from '../../constants/menuStyles';
+import {PRIMARY_TEXT_COLOR} from '../../constants/colors';
 import {getRecommendedQuizzes} from '../../utils/GetQuizzes';
 import {QuizContext} from '../../context/QuizContext';
 import {wait} from '../../utils/otherFunctions';
@@ -36,8 +37,7 @@ export default function Recommended({navigation}) {
     <FlatList
       refreshControl={
         <RefreshControl
-          progressBackgroundColor="white"
-          tintColor="white"
+          tintColor={PRIMARY_TEXT_COLOR}
           refreshing={refreshing}
           onRefresh={onRefresh}
         />

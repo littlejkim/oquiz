@@ -12,12 +12,12 @@ import Animated, {
   call,
 } from 'react-native-reanimated';
 import {useValue, translateZ} from  "react-native-redash/lib/module/v1";
-
 import MaskedView from '@react-native-community/masked-view';
 
 import GestureHandler from './GestureHandler';
 import {VISIBLE_ITEMS, ITEM_HEIGHT} from './Constants';
 import {transYtoIndex} from '../../utils/otherFunctions'
+import {PRIMARY_TEXT_COLOR, SECONDARY_COLOR} from "../../constants/colors"
 
 const {width} = Dimensions.get('window');
 
@@ -102,13 +102,13 @@ const Picker = ({rangeChoices, defaultValue, extractFromPicker}: PickerProps) =>
     <View style={styles.container}>
       <MaskedView {...{maskElement}}>
         <View style={{height: ITEM_HEIGHT * 2, backgroundColor: 'grey'}} />
-        <View style={{height: ITEM_HEIGHT, backgroundColor: 'white'}} />
+        <View style={{height: ITEM_HEIGHT, backgroundColor: PRIMARY_TEXT_COLOR}} />
         <View style={{height: ITEM_HEIGHT * 2, backgroundColor: 'grey'}} />
       </MaskedView>
       <View style={StyleSheet.absoluteFill}>
         <View
           style={{
-            borderColor: '#ffe200',
+            borderColor: SECONDARY_COLOR,
             borderTopWidth: 2.5,
             borderBottomWidth: 2.5,
             top: ITEM_HEIGHT * 2,

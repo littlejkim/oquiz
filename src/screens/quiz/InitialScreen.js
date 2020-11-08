@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 
 import styles from '../../constants/styles';
+import {PRIMARY_TEXT_COLOR} from '../../constants/colors';
 
 export default function InitialScreen({route, navigation}) {
   const {item} = route.params;
@@ -17,7 +18,7 @@ export default function InitialScreen({route, navigation}) {
         <Text
           style={{
             textAlign: 'left',
-            color: 'white',
+            color: PRIMARY_TEXT_COLOR,
             fontSize: 40,
             margin: 30,
           }}>

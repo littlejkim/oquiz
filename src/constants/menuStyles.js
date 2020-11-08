@@ -1,37 +1,41 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import {
+  PRIMARY_COLOR,
+  PRIMARY_TEXT_COLOR,
+  SECONDARY_COLOR,
+  SECONDARY_TEXT_COLOR,
+} from './colors';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#303857',
-    // marginVertical: 10,
+    backgroundColor: PRIMARY_COLOR,
+  },
+  itemContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingTop: 20,
+    paddingBottom: 20,
     paddingLeft: 10,
     paddingRight: 10,
   },
   item: {
-    backgroundColor: '#ffe200',
-    // alignItems: 'center',
-    justifyContent: 'flex-start',
-    borderRadius: 15,
     flex: 1,
-    margin: 4,
-    height: Dimensions.get('window').width / 2 - 50,
   },
-
+  itemCount: {
+    color: '#F9AA33',
+    fontSize: 24,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
   itemTitleText: {
-    color: 'black',
+    color: PRIMARY_TEXT_COLOR,
     fontSize: 23,
     fontWeight: 'bold',
-    marginTop: Dimensions.get('window').width / 20,
-    marginLeft: Dimensions.get('window').width / 20,
-    marginRight: Dimensions.get('window').width / 20,
-    marginBottom: 8,
   },
   itemDescriptionText: {
-    color: 'black',
+    color: PRIMARY_TEXT_COLOR,
     fontSize: 15,
-    marginLeft: Dimensions.get('window').width / 20,
-    marginRight: Dimensions.get('window').width / 20,
   },
   title: {
     fontSize: 24,

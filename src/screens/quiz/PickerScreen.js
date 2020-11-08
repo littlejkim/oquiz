@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, Alert} from 'react-native';
 import {HeaderBackButton} from '@react-navigation/stack';
-import styles from '../../constants/styles';
-import Picker from '../../components/picker/Picker';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+
+import styles from '../../constants/styles';
+import {PRIMARY_COLOR, SECONDARY_COLOR} from '../../constants/colors';
+import Picker from '../../components/picker/Picker';
 import {rangeChoices} from '../../constants/choices';
 
 export default function PickerScreen({route, navigation}) {
@@ -108,9 +110,16 @@ export default function PickerScreen({route, navigation}) {
           flex: 0.1,
           flexDirection: 'row',
         }}>
-        <View style={{flex: questionIndex, backgroundColor: '#ffe200'}}></View>
         <View
-          style={{flex: 9 - questionIndex, backgroundColor: '#303857'}}></View>
+          style={{
+            flex: questionIndex,
+            backgroundColor: SECONDARY_COLOR,
+          }}></View>
+        <View
+          style={{
+            flex: 9 - questionIndex,
+            backgroundColor: PRIMARY_COLOR,
+          }}></View>
       </View>
       <View style={[styles.mainContent, {flex: 10}]}>
         <View

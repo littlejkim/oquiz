@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 
 import styles from '../constants/styles';
+import {PRIMARY_TEXT_COLOR} from '../constants/colors';
 import {setDummy} from '../utils/GetQuizzes';
 import {QuizContext} from '../context/QuizContext';
 
@@ -13,7 +14,7 @@ export default function HomeScreen({navigation}) {
           <Text
             style={{
               textAlign: 'left',
-              color: 'white',
+              color: PRIMARY_TEXT_COLOR,
               fontSize: 40,
               margin: 30,
             }}>

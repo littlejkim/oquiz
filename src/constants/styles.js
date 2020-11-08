@@ -1,18 +1,22 @@
 import {StyleSheet} from 'react-native';
-
+import {
+  PRIMARY_COLOR,
+  PRIMARY_TEXT_COLOR,
+  SECONDARY_COLOR,
+  SECONDARY_TEXT_COLOR,
+} from './colors';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#303857',
+    backgroundColor: PRIMARY_COLOR,
   },
   mainContent: {
     flex: 5,
-    backgroundColor: '#303857',
-    // alignItems: 'center',
+    backgroundColor: PRIMARY_COLOR,
   },
   footer: {
     flex: 1,
-    backgroundColor: '#303857',
+    backgroundColor: PRIMARY_COLOR,
     marginBottom: 20,
     marginStart: 20,
     marginEnd: 20,
@@ -21,7 +25,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ffe200',
+    backgroundColor: SECONDARY_COLOR,
     borderRadius: 50,
   },
   footerSubButton: {
@@ -32,11 +36,11 @@ export default StyleSheet.create({
   },
   footerMainText: {
     fontSize: 18,
-    color: 'black',
+    color: SECONDARY_TEXT_COLOR,
   },
   footerSubtext: {
     fontSize: 17,
     textDecorationLine: 'underline',
-    color: 'white',
+    color: PRIMARY_TEXT_COLOR,
   },
 });

@@ -10,6 +10,8 @@ import PickerScreen from './src/screens/quiz/PickerScreen';
 
 import {QuizProvider} from './src/context/QuizContext';
 
+import {PRIMARY_COLOR, PRIMARY_TEXT_COLOR} from './src/constants/colors';
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -19,9 +21,9 @@ export default function App() {
         <Stack.Navigator
           initialRouteName="Home"
           screenOptions={{
-            headerTintColor: 'white',
+            headerTintColor: PRIMARY_TEXT_COLOR,
             headerStyle: {
-              backgroundColor: '#303857',
+              backgroundColor: PRIMARY_COLOR,
               shadowColor: 'transparent',
             },
             headerBackTitleVisible: false,

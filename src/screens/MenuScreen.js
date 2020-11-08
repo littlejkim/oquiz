@@ -3,6 +3,11 @@ import {View, Dimensions} from 'react-native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 import styles from '../constants/styles';
+import {
+  PRIMARY_COLOR,
+  SECONDARY_COLOR,
+  PRIMARY_TEXT_COLOR,
+} from '../constants/colors';
 import Recommended from '../components/menu/Recommended';
 import Best from '../components/menu/Best';
 import Recent from '../components/menu/Recent';
@@ -15,10 +20,10 @@ export default function MenuScreen() {
       <Tab.Navigator
         tabBarOptions={{
           labelStyle: {fontSize: 15},
-          style: {backgroundColor: '#303857', marginBottom: 10},
-          activeTintColor: 'white',
+          style: {backgroundColor: PRIMARY_COLOR},
+          activeTintColor: PRIMARY_TEXT_COLOR,
           pressOpacity: 0.5,
-          indicatorStyle: {backgroundColor: '#ffe200'},
+          indicatorStyle: {backgroundColor: SECONDARY_COLOR, height: 3},
         }}
         tabBarPosition="top"
         swipeVelocityImpact={0.4}

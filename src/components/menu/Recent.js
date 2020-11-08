@@ -1,12 +1,19 @@
 import React from 'react';
-import {TouchableOpacity, Text, FlatList, RefreshControl} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  FlatList,
+  RefreshControl,
+} from 'react-native';
 import {useScrollToTop} from '@react-navigation/native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 import styles from '../../constants/menuStyles';
 import {getRecentQuizzes, refreshRecentQuizzes} from '../../utils/GetQuizzes';
 import {QuizContext} from '../../context/QuizContext';
-import {wait} from '../../utils/otherFunctions';
+import {wait, ItemSeparator} from '../../utils/otherFunctions';
+import {PRIMARY_TEXT_COLOR} from '../../constants/colors';
 
 export default function Recent({navigation}) {
   const {
@@ -102,10 +109,10 @@ export default function Recent({navigation}) {
 
   return (
     <FlatList
+      ItemSeparatorComponent={ItemSeparator}
       refreshControl={
         <RefreshControl
-          progressBackgroundColor="white"
-          tintColor="white"
+          tintColor={PRIMARY_TEXT_COLOR}
           refreshing={refreshing}
           onRefresh={onRefresh}
         />
@@ -130,8 +137,17 @@ export default function Recent({navigation}) {
               });
               navigation.navigate('Initial', {item: item});
             }}>
-            <Text style={styles.itemTitleText}>{item.title}</Text>
-            <Text style={styles.itemDescriptionText}>{item.description} </Text>
+            <View style={styles.itemContainer}>
+              <View style={{flex: 0.8}}>
+                <Text style={styles.itemCount}>{index + 1}</Text>
+              </View>
+              <View style={{paddingLeft: 10}}>
+                <Text style={styles.itemTitleText}>{item.title}</Text>
+                <Text style={styles.itemDescriptionText}>
+                  {item.description}
+                </Text>
+              </View>
+            </View>
           </TouchableOpacity>
         );
       }}
