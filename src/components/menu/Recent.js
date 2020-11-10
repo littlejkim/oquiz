@@ -12,8 +12,7 @@ import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import styles from '../../constants/menuStyles';
 import {getRecentQuizzes, refreshRecentQuizzes} from '../../utils/GetQuizzes';
 import {QuizContext} from '../../context/QuizContext';
-import {wait, ItemSeparator} from '../../utils/otherFunctions';
-import {PRIMARY_TEXT_COLOR} from '../../constants/colors';
+import {wait} from '../../utils/otherFunctions';
 
 export default function Recent({navigation}) {
   const {
@@ -105,14 +104,13 @@ export default function Recent({navigation}) {
     } catch (error) {
       console.error(error);
     }
-  }, [refreshing, lastDoc]);
+  }, [firstDoc, lastDoc, setRecent, setFirstDoc, setLastDoc]);
 
   return (
     <FlatList
-      ItemSeparatorComponent={ItemSeparator}
       refreshControl={
         <RefreshControl
-          tintColor={PRIMARY_TEXT_COLOR}
+          tintColor="grey"
           refreshing={refreshing}
           onRefresh={onRefresh}
         />
@@ -138,10 +136,14 @@ export default function Recent({navigation}) {
               navigation.navigate('Initial', {item: item});
             }}>
             <View style={styles.itemContainer}>
-              <View style={{flex: 0.8}}>
+              <View
+                style={{
+                  flex: 0.1,
+                  alignSelf: 'auto',
+                }}>
                 <Text style={styles.itemCount}>{index + 1}</Text>
               </View>
-              <View style={{paddingLeft: 10}}>
+              <View style={styles.itemDetails}>
                 <Text style={styles.itemTitleText}>{item.title}</Text>
                 <Text style={styles.itemDescriptionText}>
                   {item.description}

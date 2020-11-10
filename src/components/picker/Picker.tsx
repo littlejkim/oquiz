@@ -17,7 +17,7 @@ import MaskedView from '@react-native-community/masked-view';
 import GestureHandler from './GestureHandler';
 import {VISIBLE_ITEMS, ITEM_HEIGHT} from './Constants';
 import {transYtoIndex} from '../../utils/otherFunctions'
-import {PRIMARY_TEXT_COLOR, SECONDARY_COLOR} from "../../constants/colors"
+import {PRIMARY_TEXT_COLOR, SECONDARY_COLOR, TERTIARY_COLOR} from "../../constants/colors"
 
 const {width} = Dimensions.get('window');
 
@@ -86,8 +86,8 @@ const Picker = ({rangeChoices, defaultValue, extractFromPicker}: PickerProps) =>
 
   let value;
   useCode(() => {
-    return call([translateY], translateY => {
-      let changed = transYtoIndex(
+    return call([translateY], (translateY) => {
+      const changed = transYtoIndex(
         parseInt(translateY.toString()),
         rangeChoices.length,
       );
@@ -108,7 +108,7 @@ const Picker = ({rangeChoices, defaultValue, extractFromPicker}: PickerProps) =>
       <View style={StyleSheet.absoluteFill}>
         <View
           style={{
-            borderColor: SECONDARY_COLOR,
+            borderColor: TERTIARY_COLOR,
             borderTopWidth: 2.5,
             borderBottomWidth: 2.5,
             top: ITEM_HEIGHT * 2,

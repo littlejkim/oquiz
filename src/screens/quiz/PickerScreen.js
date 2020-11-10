@@ -1,10 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useReducer} from 'react';
 import {View, Text, TouchableOpacity, Alert} from 'react-native';
 import {HeaderBackButton} from '@react-navigation/stack';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 import styles from '../../constants/styles';
-import {PRIMARY_COLOR, SECONDARY_COLOR} from '../../constants/colors';
+import {
+  PRIMARY_COLOR,
+  PRIMARY_TEXT_COLOR,
+  TERTIARY_COLOR,
+} from '../../constants/colors';
 import Picker from '../../components/picker/Picker';
 import {rangeChoices} from '../../constants/choices';
 
@@ -31,7 +35,7 @@ export default function PickerScreen({route, navigation}) {
     navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity style={{marginRight: 20}} onPress={exitAlert}>
-          <Text style={{color: 'white', fontSize: 16}}>나가기</Text>
+          <Text style={{color: PRIMARY_TEXT_COLOR, fontSize: 16}}>나가기</Text>
         </TouchableOpacity>
       ),
       headerLeft: (props) => (
@@ -56,12 +60,15 @@ export default function PickerScreen({route, navigation}) {
       ),
     });
   });
+
+  // set title to room id
   useEffect(() => {
     navigation.setOptions({
       headerTitle: route.params.title,
     });
-  }, []);
+  });
 
+  // dummy questions
   const questions = [
     {value: 0, question: '1. 가장 좋아하는 음식이 어떻게 되세요?'},
     {value: 1, question: '2. 가장 좋아하는 동물이 어떻게 되세요?'},
@@ -78,8 +85,6 @@ export default function PickerScreen({route, navigation}) {
     },
   ];
 
-  const [questionIndex, setQuestionIndex] = useState(0);
-
   // haptic feedback options
   const hapticFeedbackOptions = {
     enableVibrateFallback: true,
@@ -92,6 +97,8 @@ export default function PickerScreen({route, navigation}) {
     ReactNativeHapticFeedback.trigger('impactLight', hapticFeedbackOptions);
   };
 
+  // tracking question index
+  const [questionIndex, setQuestionIndex] = useState(0);
   const nextSelected = () => {
     ReactNativeHapticFeedback.trigger('impactLight', hapticFeedbackOptions);
     if (questionIndex < 9) {
@@ -113,7 +120,7 @@ export default function PickerScreen({route, navigation}) {
         <View
           style={{
             flex: questionIndex,
-            backgroundColor: SECONDARY_COLOR,
+            backgroundColor: TERTIARY_COLOR,
           }}></View>
         <View
           style={{
@@ -129,8 +136,8 @@ export default function PickerScreen({route, navigation}) {
           }}>
           <Text
             style={{
-              margin: 30,
-              color: 'white',
+              margin: 25,
+              color: PRIMARY_TEXT_COLOR,
               fontSize: 30,
               textAlign: 'left',
             }}>

@@ -10,7 +10,7 @@ export default function InitialScreen({route, navigation}) {
     navigation.setOptions({
       headerTitle: item.title,
     });
-  }, []);
+  });
 
   return (
     <View style={styles.container}>

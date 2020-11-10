@@ -7,6 +7,7 @@ import {
   PRIMARY_COLOR,
   SECONDARY_COLOR,
   PRIMARY_TEXT_COLOR,
+  TERTIARY_COLOR,
 } from '../constants/colors';
 import Recommended from '../components/menu/Recommended';
 import Best from '../components/menu/Best';
@@ -20,10 +21,10 @@ export default function MenuScreen() {
       <Tab.Navigator
         tabBarOptions={{
           labelStyle: {fontSize: 15},
-          style: {backgroundColor: PRIMARY_COLOR},
-          activeTintColor: PRIMARY_TEXT_COLOR,
+          style: {backgroundColor: PRIMARY_COLOR, marginBottom: 10},
+          activeTintColor: 'black',
           pressOpacity: 0.5,
-          indicatorStyle: {backgroundColor: SECONDARY_COLOR, height: 3},
+          indicatorStyle: {backgroundColor: TERTIARY_COLOR, height: 3},
         }}
         tabBarPosition="top"
         swipeVelocityImpact={0.4}

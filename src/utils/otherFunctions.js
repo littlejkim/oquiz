@@ -23,7 +23,7 @@ const ItemSeparator = () => (
   <View
     style={{
       color: '#ffe200',
-      height: 0.5,
+      // height: 0.5,
       width: '100%',
       backgroundColor: '#ffe200',
     }}

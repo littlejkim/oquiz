@@ -1,5 +1,11 @@
 import React from 'react';
-import {TouchableOpacity, Text, FlatList, RefreshControl} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  FlatList,
+  RefreshControl,
+} from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import {useScrollToTop} from '@react-navigation/native';
 
@@ -58,8 +64,21 @@ export default function Recommended({navigation}) {
               });
               navigation.navigate('Initial', {item: item});
             }}>
-            <Text style={styles.itemTitleText}>{item.title}</Text>
-            <Text style={styles.itemDescriptionText}>{item.description} </Text>
+            <View style={styles.itemContainer}>
+              <View
+                style={{
+                  flex: 0.1,
+                  alignSelf: 'auto',
+                }}>
+                <Text style={styles.itemCount}>{index + 1}</Text>
+              </View>
+              <View style={styles.itemDetails}>
+                <Text style={styles.itemTitleText}>{item.title}</Text>
+                <Text style={styles.itemDescriptionText}>
+                  {item.description}
+                </Text>
+              </View>
+            </View>
           </TouchableOpacity>
         );
       }}

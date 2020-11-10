@@ -1,11 +1,13 @@
-const PRIMARY_COLOR = '#303857';
-const SECONDARY_COLOR = '#ffe200';
-const PRIMARY_TEXT_COLOR = 'white';
+const PRIMARY_COLOR = '#ebebeb';
+const SECONDARY_COLOR = 'white';
+const TERTIARY_COLOR = '#40a798';
+const PRIMARY_TEXT_COLOR = 'black';
 const SECONDARY_TEXT_COLOR = 'black';
 
 export {
   PRIMARY_COLOR,
   SECONDARY_COLOR,
+  TERTIARY_COLOR,
   PRIMARY_TEXT_COLOR,
   SECONDARY_TEXT_COLOR,
 };
